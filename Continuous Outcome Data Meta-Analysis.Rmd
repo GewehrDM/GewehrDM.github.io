@@ -5,26 +5,156 @@ date: "2024-12-29"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+<a href="https://gewehrdm.github.io" style="
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 20px 0;
+    background-color: #1D3557; /* Azul escuro */
+    color: white; /* Texto branco */
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
+"
+    onmouseover="this.style.backgroundColor='#457B9D'; this.style.transform='scale(1.05)';"
+    onmouseout="this.style.backgroundColor='#1D3557'; this.style.transform='scale(1)';"
+    onmousedown="this.style.transform='scale(0.95)';"
+    onmouseup="this.style.transform='scale(1.05)';">
+    ⬅ Back to Menu
+</a>
+
+<h4>Overview</h4>
+
+This tutorial focuses on continuous outcome data meta-analysis using the R `meta` package.
+
+<h4>Load Packages</h4>
+
+```{r Loading the Packages, message=FALSE, warning=FALSE}
+library(meta)
+library(readxl)
 ```
 
-## R Markdown
+<h4>Importing the Dataset</h4>
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+The entire dataset was converted into a dataframe format for easier handling and compatibility with the R example analysis. The dataframe structure allows seamless data manipulation and analysis using R’s built-in functions and packages. 
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r Dataset, include=FALSE}
+ma<-list(bmi=structure(list(Author = c("Study 1", "Study 2", "Study 3", "Study 4", 
+"Study 5", "Study 6", "Study 7", "Study 8", "Study 9"), Year = c(2007, 
+2011, 2009, 2000, 2023, 2006, 2010, 2021, 2023), mean.e = c(-1.04, 
+NA, -0.17, NA, NA, -0.05, -1.03, NA, NA), sd.e = c(1.75, NA, 
+1.96, NA, NA, 1.77, 1.2, NA, NA), median.e = c(NA, 1.21, NA, 
+-0.5, -0.26, NA, NA, 1.23, -1.42), q1.e = c(NA, 0.53, NA, -1.47, 
+-0.87, NA, NA, 0.39, -2.24), q3.e = c(NA, 1.82, NA, 0.19, 0.37, 
+NA, NA, 2.11, -0.52), min.e = c(NA, -0.2, NA, -2.44, -1.63, NA, 
+NA, -0.16, -2.98), max.e = c(NA, 2.58, NA, 0.91, 1.06, NA, NA, 
+2.88, 0.21), n.e = c(37, 98, 39, 69, 51, 90, 78, 49, 92), mean.c = c(-1.2, 
+NA, -0.85, NA, NA, -1.74, 0.36, NA, NA), sd.c = c(0.55, NA, 1.48, 
+NA, NA, 0.9, 1.67, NA, NA), median.c = c(NA, -0.5, NA, -1.67, 
+-1.85, NA, NA, 1.12, 0.23), q1.c = c(NA, -1.49, NA, -2.24, -2.48, 
+NA, NA, 0.43, -0.6), q3.c = c(NA, 0.04, NA, -1.08, -0.96, NA, 
+NA, 2.07, 0.99), min.c = c(NA, -2.09, NA, -2.87, -3.24, NA, NA, 
+-0.15, -1.11), max.c = c(NA, 1.03, NA, -0.41, -0.16, NA, NA, 
+2.63, 1.79), n.c = c(44, 35, 41, 60, 97, 86, 68, 94, 32)), row.names = c(NA, 
+-9L), class = "data.frame"))
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r View Dataset, echo=TRUE}
+ma$bmi
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+<h4>Performing the Meta-Analysis</h4>
+
+To perform the meta-analysis of binary outcome data we will use the `metacont()` function from the `meta` package. We need to provide some instructions for the `metacont()` function. These instructions are known as arguments, which can be one, two, three, or more inputs that the function uses to perform its task. The main arguments of the `metacont()` function are:
+
+<h6> Scenario 1 - Mean and SD Available</h6>
+```{r Performing the Meta-Analysis - Scenario 1, echo=TRUE}
+m.bmi<-metacont(mean.e=mean.e, sd.e=sd.e, n.e=n.e,  
+                mean.c=mean.c, sd.c=sd.c, n.c=n.c,
+                data = ma$bmi,
+                method.tau = "REML",
+                sm = "MD",
+                studlab = Author)
+```
+
+<h6> Scenario 2 - Some Studies with Missing Mean and SD</h6>
+```{r Performing the Meta-Analysis - Scenario 2, echo=TRUE}
+m.bmi<-metacont(mean.e=mean.e, sd.e=sd.e, n.e=n.e,  
+                median.e=median.e, q1.e=q1.e, q3.e=q3.e, 
+                min.e=min.e, max.e=max.e,  
+                mean.c=mean.c, sd.c=sd.c, n.c=n.c,
+                median.c=median.c, q1.c=q1.c, q3.c=q3.c, 
+                min.c=min.c, max.c=max.c,  
+                data = ma$bmi,
+                method.tau = "REML",
+                sm = "MD",
+                studlab = Author)
+```
+
+<h4>Summarizing the Results</h4>
+
+To visualize the results of a meta-analysis conducted with the `metabin()` function, we will use the `summary()` function. It will generate a summary of the analysis:
+```{r Summarize the results}
+summary(m.bmi)
+```
+
+<h4>Creating the Forest Plot</h4>
+
+To create the forest plot, we will use the `forest()` function. Alongside this function, we will include specific arguments to customize the appearance and content of the forest plot, such as labels, confidence interval formatting, and display options. These arguments ensure the plot is clear, informative, and tailored to the dataset being analyzed.
+```{r Creating the Forest Plot, echo=TRUE, fig.height=5, fig.width=12, dpi=600}
+forest(m.bmi,
+       smlab="Length of Stay",
+       layout="Revman",
+       sortvar=TE, 
+       lab.e="Experimental", label.left="Favors Experimental",
+       lab.c="Control", label.right="Favors Control",
+       ff.lr = "bold",
+       leftcols=c("studlab", "Year", "mean.e","sd.e","n.e", 
+                  "mean.c","sd.c","n.c","w.random", "effect", "ci"),
+       leftlabs = c("Studies", "Year", "Mean", "SD", "Total",
+                    "Mean","SD","Total","Weight","MD","95% CI"),
+       text.random = "Random effects model",
+       random=TRUE,
+       common=FALSE,
+       test.overall.random=TRUE,
+       colgap = "3mm",
+       fs.heading=12,
+       fs.study=12,
+       fs.hetset=10,
+       digits=2,
+       digits.pval=2,
+       pooled.totals = TRUE,
+       col.square="darkcyan", col.square.lines="black",
+       prediction = T, col.predict = "#CEF2EE", col.predict.lines = "black", ff.predict=1)
+```
+
+<h4>References:</h4>
+
+1. Core Team (2023). R: A Language and Environment for Statistical Computing. R Foundation for Statistical Computing, Vienna, Austria. <https://www.R-project.org/>
+2. RStudio Team (2020). RStudio: Integrated Development for R. RStudio, PBC, Boston, MA URL http://www.rstudio.com/.
+3. meta package: Balduzzi S, Rücker G, Schwarzer G. How to perform a meta-analysis with R: a practical tutorial. In: Evidence-Based Mental Health. 22nd ed.; 2019:153-160.
+4. readxl package: Wickham H, Bryan J (2023). readxl: Read Excel Files. https://readxl.tidyverse.org, https://github.com/tidyverse/readxl.
+
+
+
+<a href="https://gewehrdm.github.io" style="
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 20px 0;
+    background-color: #1D3557; /* Azul escuro */
+    color: white; /* Texto branco */
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
+"
+    onmouseover="this.style.backgroundColor='#457B9D'; this.style.transform='scale(1.05)';"
+    onmouseout="this.style.backgroundColor='#1D3557'; this.style.transform='scale(1)';"
+    onmousedown="this.style.transform='scale(0.95)';"
+    onmouseup="this.style.transform='scale(1.05)';">
+    ⬅ Back to Menu
+</a>
