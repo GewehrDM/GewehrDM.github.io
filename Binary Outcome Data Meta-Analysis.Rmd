@@ -1,6 +1,6 @@
 ---
 title: "Binary Outcome Data Meta-Analysis"
-author: "Douglas Mesadri Gewehr"
+author: "Douglas Mesadri Gewehr, MD - Meta-Analysis Academy"
 date: "2024-12-29"
 output: html_document
 ---
@@ -13,7 +13,7 @@ output: html_document
     text-decoration: none;
     border-radius: 5px;
     font-size: 16px;
-">⬅ Back to Index</a>
+">⬅ Back to Menu</a>
 
 ##Overview
 
@@ -120,4 +120,4 @@ forest(m.acm,
     text-decoration: none;
     border-radius: 5px;
     font-size: 16px;
-">⬅ Back to Index</a>
+">⬅ Back to Menu</a>
