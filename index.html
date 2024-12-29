@@ -9,48 +9,64 @@
         :root {
             --turquoise: #A8DADC; /* Turquesa claro */
             --dark-blue: #1D3557; /* Azul escuro */
-            --gray: #6D6875; /* Cinza */
+            --white: #FFFFFF; /* Branco */
         }
 
         body {
             font-family: Arial, sans-serif;
-            line-height: 1.6;
             margin: 0;
             padding: 0;
             background-color: var(--turquoise);
-            color: var(--gray);
+            color: var(--dark-blue);
         }
 
+        /* Estilo da seção do cabeçalho */
         header {
-            background: var(--dark-blue);
-            color: #fff;
-            text-align: center;
-            padding: 20px 0;
+            background: var(--white);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 0;
+            position: relative;
+        }
+
+        header .logo-container {
+            position: absolute;
+            top: 20px;
+            left: 10%;
+            right: 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         header img {
-            max-width: 150px;
-            margin: 10px;
+            max-width: 100px;
+            height: auto;
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 28px;
+        header h1, header h2, header p {
+            margin: 10px 0;
+            text-align: center;
         }
 
-        header h2 {
-            margin: 5px 0 15px;
-            font-size: 18px;
-            color: #D1D1D1;
+        /* Fundo azul na parte inferior */
+        .content {
+            background: var(--dark-blue);
+            color: var(--white);
+            text-align: center;
+            padding: 50px 20px;
+            border-top: 10px solid var(--white); /* Divide visualmente as seções */
         }
 
         .container {
             max-width: 800px;
-            margin: 20px auto;
-            background: #fff;
+            margin: 0 auto;
+            background: var(--white);
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: left;
         }
 
         ul {
@@ -70,28 +86,31 @@
 
         ul li a:hover {
             text-decoration: underline;
-            color: var(--gray);
         }
     </style>
 </head>
 <body>
-<header>
-    <div style="background-color: white; border-radius: 8px; display: inline-block; padding: 10px;">
-        <img src="Meta Hub logo.png" alt="Meta Hub Logo" style="max-width: 120px;">
-        <img src="Meta-analysis Academy logo.png" alt="Meta-Analysis Academy Logo" style="max-width: 120px;">
-    </div>
-    <h1>Douglas Mesadri Gewehr, MD</h1>
-    <h2>Meta-Analysis Academy</h2>
-    <p>Explore my R analyses and projects</p>
-</header>
-    <div class="container">
-        <h2>Available Analyses</h2>
-        <ul>
-            <li><a href="Binary-Outcome-Data-Meta-Analysis.html">Binary Outcome Data Meta Analysis</a></li>
-        </ul>
-        <h2>About</h2>
-        <p>This site showcases my R projects and analyses, converted into HTML for easy viewing.</p>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="logo-container">
+            <img src="Meta Hub logo.png" alt="Meta Hub Logo">
+            <img src="Meta-analysis Academy logo.png" alt="Meta-Analysis Academy Logo">
+        </div>
+        <h1>Douglas Mesadri Gewehr, MD</h1>
+        <h2>Meta-Analysis Academy</h2>
+        <p>Explore my R analyses and projects</p>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <div class="content">
+        <div class="container">
+            <h2>Topics</h2>
+            <ul>
+                <li><a href="Binary-Outcome-Data-Meta-Analysis.html">Binary Outcome Data Meta Analysis</a></li>
+            </ul>
+            <h2>About</h2>
+            <p>This site showcases my R projects and analyses, converted into HTML for easy viewing.</p>
+        </div>
     </div>
 </body>
 </html>
-
