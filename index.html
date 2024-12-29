@@ -9,6 +9,7 @@
         :root {
             --turquoise: #A8DADC; /* Turquesa claro */
             --dark-blue: #1D3557; /* Azul escuro */
+            --gray: #6D6875; /* Cinza */
             --white: #FFFFFF; /* Branco */
         }
 
@@ -16,95 +17,111 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--turquoise);
+            background: var(--turquoise);
             color: var(--dark-blue);
         }
 
-        /* Estilo da seção do cabeçalho */
+        /* Cabeçalho */
         header {
             background: var(--white);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 30px 0;
+            padding: 20px 0;
+            text-align: center;
             position: relative;
+            border-bottom: 5px solid var(--turquoise);
         }
 
-        header .logo-container {
-            position: absolute;
-            top: 20px;
-            left: 10%;
-            right: 10%;
+        .header-content {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: center;
+            gap: 20px; /* Espaçamento entre os elementos */
+            flex-wrap: wrap; /* Permite quebra em telas menores */
         }
 
-        header img {
-            max-width: 100px;
+        .header-content img {
+            max-height: 80px; /* Tamanho proporcional */
             height: auto;
         }
 
-        header h1, header h2, header p {
-            margin: 10px 0;
-            text-align: center;
+        .header-text h1 {
+            margin: 0;
+            font-size: 24px;
+            color: var(--dark-blue);
         }
 
-        /* Fundo azul na parte inferior */
+        .header-text h2 {
+            margin: 5px 0 0;
+            font-size: 16px;
+            color: var(--gray);
+        }
+
+        /* Seção de conteúdo */
         .content {
-            background: var(--dark-blue);
-            color: var(--white);
-            text-align: center;
+            background: linear-gradient(to bottom, var(--turquoise) 50%, var(--dark-blue) 50%);
             padding: 50px 20px;
-            border-top: 10px solid var(--white); /* Divide visualmente as seções */
         }
 
         .container {
             max-width: 800px;
             margin: 0 auto;
             background: var(--white);
-            padding: 20px;
+            padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            text-align: left;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 10;
+            text-align: left; /* Alinhamento à esquerda */
         }
 
-        ul {
+        .container h2 {
+            margin-top: 0;
+            color: var(--dark-blue);
+            font-size: 20px;
+        }
+
+        .container ul {
             list-style: none;
             padding: 0;
+            margin: 20px 0;
         }
 
-        ul li {
+        .container ul li {
             margin: 10px 0;
         }
 
-        ul li a {
+        /* Estilo dos Links */
+        .container ul li a {
             text-decoration: none;
-            color: var(--dark-blue);
+            color: var(--gray); /* Cinza como cor padrão */
             font-weight: bold;
         }
 
-        ul li a:hover {
-            text-decoration: underline;
+        .container ul li a:hover {
+            text-decoration: underline; /* Sublinhado ao passar o mouse */
+        }
+
+        .container p {
+            color: var(--gray);
         }
     </style>
 </head>
 <body>
     <!-- Cabeçalho -->
     <header>
-        <div class="logo-container">
+        <div class="header-content">
             <img src="Meta Hub logo.png" alt="Meta Hub Logo">
+            <div class="header-text">
+                <h1>Douglas Mesadri Gewehr, MD</h1>
+                <h2>Meta-Analysis Academy</h2>
+            </div>
             <img src="Meta-analysis Academy logo.png" alt="Meta-Analysis Academy Logo">
         </div>
-        <h1>Douglas Mesadri Gewehr, MD</h1>
-        <h2>Meta-Analysis Academy</h2>
-        <p>Explore my R analyses and projects</p>
     </header>
 
     <!-- Conteúdo Principal -->
     <div class="content">
         <div class="container">
-            <h2>Topics</h2>
+            <h2>Available Analyses</h2>
             <ul>
                 <li><a href="Binary-Outcome-Data-Meta-Analysis.html">Binary Outcome Data Meta Analysis</a></li>
             </ul>
