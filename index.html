@@ -5,23 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Douglas Mesadri Gewehr, MD</title>
     <style>
+        /* Paleta de cores */
+        :root {
+            --turquoise: #A8DADC; /* Turquesa claro */
+            --dark-blue: #1D3557; /* Azul escuro */
+            --gray: #6D6875; /* Cinza */
+        }
+
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
+            background-color: var(--turquoise);
+            color: var(--gray);
         }
+
         header {
-            background: #0073e6;
+            background: var(--dark-blue);
             color: #fff;
-            padding: 10px 0;
             text-align: center;
+            padding: 20px 0;
         }
+
+        header img {
+            max-width: 150px;
+            margin: 10px;
+        }
+
         header h1 {
             margin: 0;
+            font-size: 28px;
         }
+
+        header h2 {
+            margin: 5px 0 15px;
+            font-size: 18px;
+            color: #D1D1D1;
+        }
+
         .container {
             max-width: 800px;
             margin: 20px auto;
@@ -30,24 +52,33 @@
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
+
         ul {
             list-style: none;
             padding: 0;
         }
+
         ul li {
             margin: 10px 0;
         }
+
         ul li a {
             text-decoration: none;
-            color: #0073e6;
+            color: var(--dark-blue);
+            font-weight: bold;
         }
+
         ul li a:hover {
             text-decoration: underline;
+            color: var(--gray);
         }
     </style>
 </head>
 <body>
     <header>
+        <!-- Logos -->
+        <img src="Meta Hub logo.png" alt="Meta Hub Logo">
+        <img src="Meta-analysis Academy logo.png" alt="Meta-Analysis Academy Logo">
         <h1>Douglas Mesadri Gewehr, MD</h1>
         <h2>Meta-Analysis Academy</h2>
         <p>Explore my R analyses and projects</p>
@@ -62,3 +93,4 @@
     </div>
 </body>
 </html>
+
