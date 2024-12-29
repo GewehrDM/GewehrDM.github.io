@@ -8,12 +8,21 @@ output: html_document
     display: inline-block;
     padding: 10px 15px;
     margin: 20px 0;
-    background-color: #0073e6;
-    color: white;
+    background-color: #1D3557; /* Azul escuro */
+    color: white; /* Texto branco */
     text-decoration: none;
     border-radius: 5px;
     font-size: 16px;
-">⬅ Back to Menu</a>
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
+"
+    onmouseover="this.style.backgroundColor='#457B9D'; this.style.transform='scale(1.05)';"
+    onmouseout="this.style.backgroundColor='#1D3557'; this.style.transform='scale(1)';"
+    onmousedown="this.style.transform='scale(0.95)';"
+    onmouseup="this.style.transform='scale(1.05)';">
+    ⬅ Back to Menu
+</a>
 
 ##Overview
 
@@ -115,9 +124,18 @@ forest(m.acm,
     display: inline-block;
     padding: 10px 15px;
     margin: 20px 0;
-    background-color: #0073e6;
-    color: white;
+    background-color: #1D3557; /* Azul escuro */
+    color: white; /* Texto branco */
     text-decoration: none;
     border-radius: 5px;
     font-size: 16px;
-">⬅ Back to Menu</a>
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
+"
+    onmouseover="this.style.backgroundColor='#457B9D'; this.style.transform='scale(1.05)';"
+    onmouseout="this.style.backgroundColor='#1D3557'; this.style.transform='scale(1)';"
+    onmousedown="this.style.transform='scale(0.95)';"
+    onmouseup="this.style.transform='scale(1.05)';">
+    ⬅ Back to Menu
+</a>
