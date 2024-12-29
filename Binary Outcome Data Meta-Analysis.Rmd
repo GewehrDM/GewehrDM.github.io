@@ -1,0 +1,52 @@
+---
+title: "Binary Outcome Data Meta-Analysis"
+author: "Douglas Mesadri Gewehr"
+date: "2024-12-29"
+output: html_document
+---
+
+```{r Loading the Packages, message=FALSE, warning=FALSE}
+library(meta)
+library(readxl)
+```
+
+```{r Imported Dataset Example}
+ma<-list(acm=structure(list(Author = c("Almendro-Delia et al.", "ATLANTIC Trial", 
+"Danchin et al.", "Load&Go Trial", "CIPAMI Trial", "Fabris et al.", 
+"Postma et al.", "Dorler et al.", "Lupi et al.", "Redfors et al.", 
+"Yudi et al.", "Alexander et al.", "Fefer et al.", "Lev et al."
+), Year = c(2015, 2014, 2018, 2013, 2012, 2022, 2014, 2011, 2016, 
+2019, 2018, 2008, 2009, 2008), event.e = c(188, 30, 9, 2, 1, 
+17, 46, 55, 5, 1960, 25, 12, 12, 1), n.e = c(3973, 906, 360, 
+56, 164, 237, 1345, 1635, 143, 37840, 892, 1029, 217, 165), event.c = c(116, 
+19, 18, 0, 4, 17, 35, 110, 13, 528, 96, 55, 6, 2), n.c = c(2076, 
+952, 360, 56, 171, 300, 1096, 1076, 143, 6964, 1915, 2756, 166, 
+127), p2y12_type = c("Clopidogrel", "Ticagrelor", "Clopidogrel", 
+"Clopidogrel", "Clopidogrel", "Clopidogrel", "Clopidogrel", "Clopidogrel", 
+"Ticagrelor", "Clopidogrel", "Clopidogrel", "Ticagrelor", "Clopidogrel", 
+"Clopidogrel"), overal_risk_of_bias = c("Serious-risk of Bias", 
+"Low-risk of Bias", "Low-risk of Bias", "Moderate-risk of Bias", 
+"Low-risk of Bias", "Moderate-risk of Bias", "Serious-risk of Bias", 
+"Moderate-risk of Bias", "Serious-risk of Bias", "Moderate-risk of Bias", 
+"Moderate-risk of Bias", "Serious-risk of Bias", "Serious-risk of Bias", 
+"Serious-risk of Bias"), `pretreatment _timing` = c("Pre-hospital", 
+"Pre-hospital", "Pre-hospital", "Pre-hospital", "Pre-hospital", 
+"Pre-hospital", "Pre-hospital", "Pre-hospital", "Pre-hospital", 
+"Pre-hospital", "Pre-hospital", "In-hospital", "In-hospital", 
+"In-hospital"), `%_HTN` = c(30, 28.8, 25.9, 52.3, 49.8, 30.5, 
+20.3, 40.1, 60.6, 40.5, 43.4, 61.4, 32.6, 70.1)), row.names = c(NA, 
+-14L), class = "data.frame"))
+```
+
+To perform the meta-analysis of binary outcome data we will use the metabin () function from the 'meta' package. We need to provide some instructions for the 'metabin()' function. These instructions are known as arguments, which can be one, two, three, or more inputs that the function uses to perform its task. The main arguments of the 'metabin()' function are:
+
+```{r Performing the Meta-Analysis}
+m.acm <- metabin(event.e, n.e, event.c, n.c,
+                 data = ma$acm,
+                 method = "MH",
+                 method.tau = "DL",
+                 sm = "RR",
+                 studlab = Author)
+
+summary(m.acm)
+```
