@@ -49,7 +49,10 @@ m.acm <- metabin(event.e, n.e, event.c, n.c,
                  method.tau = "DL",
                  sm = "RR",
                  studlab = Author)
+```
 
+To visualize the results of a meta-analysis conducted with the 'metabin()' function, we will use the 'summary()' function. It will generate a summary of the analysis:
+```{r Summarize the results}
 summary(m.acm)
 ```
 
