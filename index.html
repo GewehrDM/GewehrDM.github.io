@@ -17,103 +17,109 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--turquoise);
+            background: var(--turquoise);
             color: var(--dark-blue);
         }
 
-        /* Estilo do cabeçalho */
+        /* Cabeçalho */
         header {
             background: var(--white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+            padding: 20px 0;
+            text-align: center;
             position: relative;
-            z-index: 2; /* Garantir que o cabeçalho fique acima */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-bottom: 5px solid var(--turquoise);
         }
 
-        .logo {
-            max-height: 60px; /* Altura proporcional ao texto */
-            margin: 0 15px;
-        }
-
-        header .title-container {
+        .header-content {
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 20px; /* Espaçamento entre os elementos */
+            flex-wrap: wrap; /* Permite quebra em telas menores */
         }
 
-        header h1 {
-            margin: 0 10px;
-            font-size: 28px;
+        .header-content img {
+            max-height: 80px; /* Tamanho proporcional */
+            height: auto;
+        }
+
+        .header-text h1 {
+            margin: 0;
+            font-size: 24px;
             color: var(--dark-blue);
         }
 
-        header h2 {
-            margin: 0 10px;
+        .header-text h2 {
+            margin: 5px 0 0;
             font-size: 16px;
             color: var(--gray);
         }
 
-        /* Fundo gradiente para o conteúdo */
+        /* Seção de conteúdo */
         .content {
-            background: linear-gradient(to bottom, var(--white) 50%, var(--dark-blue) 50%);
+            background: linear-gradient(to bottom, var(--turquoise) 50%, var(--dark-blue) 50%);
             padding: 50px 20px;
-            text-align: center;
-            z-index: 1;
         }
 
-        /* Caixa branca destacada */
         .container {
             max-width: 800px;
-            margin: -50px auto 0; /* Puxa a caixa para sobrepor a interface */
+            margin: 0 auto;
             background: var(--white);
-            padding: 20px;
+            padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             position: relative;
-            z-index: 3; /* Garantir que a caixa branca fique acima do gradiente */
+            z-index: 10;
         }
 
         .container h2 {
-            color: var(--dark-blue); /* Ajustar cor do texto */
+            margin-top: 0;
+            color: var(--dark-blue);
+            font-size: 20px;
+            text-align: center;
         }
 
-        ul {
+        .container ul {
             list-style: none;
             padding: 0;
+            margin: 20px 0;
+            text-align: center;
         }
 
-        ul li {
+        .container ul li {
             margin: 10px 0;
         }
 
-        ul li a {
+        .container ul li a {
             text-decoration: none;
             color: var(--dark-blue);
             font-weight: bold;
         }
 
-        ul li a:hover {
-            text-decoration: underline;
+        .container ul li a:hover {
+            color: var(--gray);
+        }
+
+        .container p {
+            text-align: center;
+            color: var(--gray);
         }
     </style>
 </head>
 <body>
     <!-- Cabeçalho -->
     <header>
-        <div class="title-container">
-            <img src="Meta Hub logo.png" alt="Meta Hub Logo" class="logo">
-            <div>
+        <div class="header-content">
+            <img src="Meta Hub logo.png" alt="Meta Hub Logo">
+            <div class="header-text">
                 <h1>Douglas Mesadri Gewehr, MD</h1>
                 <h2>Meta-Analysis Academy</h2>
             </div>
-            <img src="Meta-analysis Academy logo.png" alt="Meta-Analysis Academy Logo" class="logo">
+            <img src="Meta-analysis Academy logo.png" alt="Meta-Analysis Academy Logo">
         </div>
     </header>
 
-    <!-- Fundo e Conteúdo Principal -->
+    <!-- Conteúdo Principal -->
     <div class="content">
         <div class="container">
             <h2>Available Analyses</h2>
