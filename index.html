@@ -9,6 +9,7 @@
         :root {
             --turquoise: #A8DADC; /* Turquesa claro */
             --dark-blue: #1D3557; /* Azul escuro */
+            --gray: #6D6875; /* Cinza */
             --white: #FFFFFF; /* Branco */
         }
 
@@ -31,17 +32,16 @@
         }
 
         header .logo-container {
-            position: absolute;
-            top: 20px;
-            left: 10%;
-            right: 10%;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            width: 80%;
+            max-width: 600px;
+            margin-bottom: 20px;
         }
 
         header img {
-            max-width: 100px;
+            max-width: 150px; /* Aumentar tamanho das logos */
             height: auto;
         }
 
@@ -50,13 +50,22 @@
             text-align: center;
         }
 
-        /* Fundo azul na parte inferior */
+        header h1 {
+            font-size: 28px;
+        }
+
+        header h2 {
+            font-size: 18px;
+            color: var(--gray);
+        }
+
+        /* Fundo azul e turquesa na parte inferior */
         .content {
-            background: var(--dark-blue);
+            background: linear-gradient(to bottom, var(--white) 50%, var(--dark-blue) 50%);
             color: var(--white);
             text-align: center;
             padding: 50px 20px;
-            border-top: 10px solid var(--white); /* Divide visualmente as seções */
+            border-top: 10px solid var(--white); /* Divisão visual */
         }
 
         .container {
@@ -67,6 +76,10 @@
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             text-align: left;
+        }
+
+        .container h2 {
+            color: var(--dark-blue); /* Ajustar cor do texto */
         }
 
         ul {
@@ -104,7 +117,7 @@
     <!-- Conteúdo Principal -->
     <div class="content">
         <div class="container">
-            <h2>Topics</h2>
+            <h2>Available Analyses</h2>
             <ul>
                 <li><a href="Binary-Outcome-Data-Meta-Analysis.html">Binary Outcome Data Meta Analysis</a></li>
             </ul>
