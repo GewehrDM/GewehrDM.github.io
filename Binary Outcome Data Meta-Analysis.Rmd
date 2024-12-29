@@ -28,14 +28,12 @@ output: html_document
 
 This analysis focuses on binary outcome data meta-analysis using the R `meta` package.
 
-
 <h4>Load Packages</h4>
 
 ```{r Loading the Packages, message=FALSE, warning=FALSE}
 library(meta)
 library(readxl)
 ```
-
 
 <h4>Importing the Dataset</h4>
 
@@ -73,7 +71,6 @@ ma<-list(acm=structure(list(Author = c("Almendro-Delia et al.", "ATLANTIC Trial"
 ma$acm
 ```
 
-
 <h4>Performing the Meta-Analysis</h4>
 
 To perform the meta-analysis of binary outcome data we will use the `metabin()` function from the `meta` package. We need to provide some instructions for the `metabin()` function. These instructions are known as arguments, which can be one, two, three, or more inputs that the function uses to perform its task. The main arguments of the `metabin()` function are:
@@ -86,14 +83,12 @@ m.acm <- metabin(event.e, n.e, event.c, n.c,
                  studlab = Author)
 ```
 
-
 <h4>Summarizing the Results</h4>
 
 To visualize the results of a meta-analysis conducted with the `metabin()` function, we will use the `summary()` function. It will generate a summary of the analysis:
 ```{r Summarize the results}
 summary(m.acm)
 ```
-
 
 <h4>Creating the Forest Plot</h4>
 
@@ -124,7 +119,6 @@ forest(m.acm,
        col.square="darkcyan", col.square.lines="black",
        prediction = TRUE, col.predict = "#CEF2EE",col.predict.lines = "black", ff.predict = 1)
 ```
-
 
 <h4>References:</h4>
 
