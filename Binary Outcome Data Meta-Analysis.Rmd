@@ -4,6 +4,21 @@ author: "Douglas Mesadri Gewehr"
 date: "2024-12-29"
 output: html_document
 ---
+<a href="index.html" style="
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 20px 0;
+    background-color: #0073e6;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+">⬅ Back to Index</a>
+
+##Overview
+
+This analysis focuses on binary outcome data meta-analysis using the R `meta` package.
+
 Loading the R packages:
 ```{r Loading the Packages, message=FALSE, warning=FALSE}
 library(meta)
@@ -41,7 +56,8 @@ ma<-list(acm=structure(list(Author = c("Almendro-Delia et al.", "ATLANTIC Trial"
 ma$acm
 ```
 
-To perform the meta-analysis of binary outcome data we will use the 'metabin()' function from the 'meta' package. We need to provide some instructions for the 'metabin()' function. These instructions are known as arguments, which can be one, two, three, or more inputs that the function uses to perform its task. The main arguments of the 'metabin()' function are:
+##Performing the Meta-Analysis
+To perform the meta-analysis of binary outcome data we will use the `metabin()` function from the `meta` package. We need to provide some instructions for the `metabin()` function. These instructions are known as arguments, which can be one, two, three, or more inputs that the function uses to perform its task. The main arguments of the `metabin()` function are:
 ```{r Performing the Meta-Analysis, echo=TRUE}
 m.acm <- metabin(event.e, n.e, event.c, n.c,
                  data = ma$acm,
@@ -51,12 +67,14 @@ m.acm <- metabin(event.e, n.e, event.c, n.c,
                  studlab = Author)
 ```
 
-To visualize the results of a meta-analysis conducted with the 'metabin()' function, we will use the 'summary()' function. It will generate a summary of the analysis:
+##Summarizing the Results
+To visualize the results of a meta-analysis conducted with the `metabin()` function, we will use the `summary()` function. It will generate a summary of the analysis:
 ```{r Summarize the results}
 summary(m.acm)
 ```
 
-To create the forest plot, we will use the 'forest()' function. Alongside this function, we will include specific arguments to customize the appearance and content of the forest plot, such as labels, confidence interval formatting, and display options. These arguments ensure the plot is clear, informative, and tailored to the dataset being analyzed.
+##Creating the Forest Plot
+To create the forest plot, we will use the `forest()` function. Alongside this function, we will include specific arguments to customize the appearance and content of the forest plot, such as labels, confidence interval formatting, and display options. These arguments ensure the plot is clear, informative, and tailored to the dataset being analyzed.
 ```{r Creating the Forest Plot, echo=TRUE, fig.height=6, fig.width=11, dpi=600}
 forest(m.acm,
        smlab = "All-cause Mortality",
@@ -84,12 +102,22 @@ forest(m.acm,
        prediction = TRUE, col.predict = "#CEF2EE",col.predict.lines = "black", ff.predict = 1)
 ```
 
-References:
+##References:
+
 1. Core Team (2023). R: A Language and Environment for Statistical Computing. R Foundation for Statistical Computing, Vienna, Austria. <https://www.R-project.org/>
-
 2. RStudio Team (2020). RStudio: Integrated Development for R. RStudio, PBC, Boston, MA URL http://www.rstudio.com/.
-
 3. meta package: Balduzzi S, Rücker G, Schwarzer G. How to perform a meta-analysis with R: a practical tutorial. In: Evidence-Based Mental Health. 22nd ed.; 2019:153-160.
-
 4. readxl package: Wickham H, Bryan J (2023). readxl: Read Excel Files. https://readxl.tidyverse.org, https://github.com/tidyverse/readxl.
 
+
+
+<a href="index.html" style="
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 20px 0;
+    background-color: #0073e6;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+">⬅ Back to Index</a>
