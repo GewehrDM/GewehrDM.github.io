@@ -38,7 +38,7 @@ library(readxl)
 
 <h4>Ratio Measures Meta-Analysis</h4>
 
-To perform the meta-analysis of ratio measures we will use the `metagen()` function from the `meta` package. We need to provide some instructions for the `metagen()` function. These instructions are known as arguments, which can be one, two, three, or more inputs that the function uses to perform its task. The main arguments of the `metagn()` function are:
+To perform the meta-analysis of ratio measures we will use the `metagen()` function from the `meta` package. We need to provide some instructions for the `metagen()` function. These instructions are known as arguments, which can be one, two, three, or more inputs that the function uses to perform its task. The main arguments of the `metagen()` function are:
 
 <h5>Usefull Formulas</h5>
 
@@ -88,7 +88,7 @@ m.rr<-metagen(TE=log(TE), seTE=seTE, lower=log(lower), upper=log(upper),
 
 <h5>Summarizing the Results</h5>
 
-To visualize the results of a meta-analysis conducted with the `metabin()` function, we will use the `summary()` function. It will generate a summary of the analysis:
+To visualize the results of a meta-analysis conducted with the `metagen()` function, we will use the `summary()` function. It will generate a summary of the analysis:
 ```{r Summarize the results - Ratios}
 summary(m.rr)
 ```
@@ -123,7 +123,7 @@ forest(m.rr,
 ```
 <h4>Difference Measures Meta-Analysis</h4>
 
-To perform the meta-analysis of difference measures we will use the `metagen()` function from the `meta` package. We need to provide some instructions for the `metagen()` function. These instructions are known as arguments, which can be one, two, three, or more inputs that the function uses to perform its task. The main arguments of the `metagn()` function are:
+To perform the meta-analysis of difference measures we will use the `metagen()` function from the `meta` package. We need to provide some instructions for the `metagen()` function. These instructions are known as arguments, which can be one, two, three, or more inputs that the function uses to perform its task. The main arguments of the `metagen()` function are:
 
 <h5>Usefull Formulas</h5>
 
@@ -165,7 +165,7 @@ m.los<-metagen(TE=TE, seTE=seTE, lower=lower, upper=upper,
 
 <h5>Summarizing the Results</h5>
 
-To visualize the results of a meta-analysis conducted with the `metabin()` function, we will use the `summary()` function. It will generate a summary of the analysis:
+To visualize the results of a meta-analysis conducted with the `metagen()` function, we will use the `summary()` function. It will generate a summary of the analysis:
 ```{r Summarize the results - Differences}
 summary(m.los)
 ```
