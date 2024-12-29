@@ -4,3 +4,270 @@ author: "Douglas Mesadri Gewehr, MD - Meta-Analysis Academy"
 date: "2024-12-29"
 output: html_document
 ---
+
+<a href="https://gewehrdm.github.io" style="
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 20px 0;
+    background-color: #1D3557; /* Azul escuro */
+    color: white; /* Texto branco */
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
+"
+    onmouseover="this.style.backgroundColor='#457B9D'; this.style.transform='scale(1.05)';"
+    onmouseout="this.style.backgroundColor='#1D3557'; this.style.transform='scale(1)';"
+    onmousedown="this.style.transform='scale(0.95)';"
+    onmouseup="this.style.transform='scale(1.05)';">
+    ⬅ Back to Menu
+</a>
+
+<h4>Overview</h4>
+
+This tutorial focuses on pre-calculated outcome data meta-analysis using the R `meta` package.
+
+<h4>Load Packages</h4>
+
+```{r Loading the Packages, message=FALSE, warning=FALSE}
+library(meta)
+library(readxl)
+```
+
+<h4>Ratio Measures Meta-Analysis</h4>
+
+To perform the meta-analysis of ratio measures we will use the `metagen()` function from the `meta` package. We need to provide some instructions for the `metagen()` function. These instructions are known as arguments, which can be one, two, three, or more inputs that the function uses to perform its task. The main arguments of the `metagn()` function are:
+
+<h5>Usefull Formulas</h5>
+
+<h6>Excel Formula for Calculating the Odds Ratio (OR)</h6>
+
+`=(event.e / (n.e - event.e)) / (event.c / (n.c - event.c))`
+
+<h6>Excel Formula for Calculating the Standard Error log(OR)</h6>
+
+`=SQRT((1/event.e) + (1/(n.e - event.e)) + (1/event.c) + (1/(n.c - event.c)))`
+
+<h6>Excel Formula for Calculating the Risk Ratio (RR)</h6>
+
+`=(event.e / n.e) / (event.c / n.c)`
+
+<h6>Excel Formula for Calculating the Standard Error log(RR)</h6>
+
+`=SQRT((1/event.e) - (1/n.e) + (1/event.c) - (1/n.c))`
+
+<h5>Importing the Dataset</h5>
+
+The entire dataset was converted into a dataframe format for easier handling and compatibility with the R example analysis. The dataframe structure allows seamless data manipulation and analysis using R’s built-in functions and packages. 
+
+```{r Dataset - Ratios, include=FALSE}
+ma<-list(rr=structure(list(Author = c("Study 1", "Study 2", "Study 3", "Study 4"
+), Year = c(2015, 2014, 2018, 2013), TE = c(1.5, 0.8, 2, 1.2), 
+    seTE = c(NA, NA, NA, 0.2087), lower = c(0.95, 0.47, 1.35, 
+    NA), upper = c(2.38, 1.35, 2.96, NA), n.e = c(150, 120, 200, 
+    180), n.c = c(150, 130, 210, 190), Subgroup_1 = c("Drug A", 
+    "Drug A", "Drug B", "Drug B"), Variable_1 = c(70, 80, 50, 
+    20)), row.names = c(NA, -4L), class = "data.frame"))
+```
+
+```{r View Dataset - Ratios, echo=TRUE}
+ma$rr
+```
+
+<h5>Performing the Meta-Analysis</h5>
+```{r Performing the Meta-Analysis - Ratios, echo=TRUE}
+m.rr<-metagen(TE=log(TE), seTE=seTE, lower=log(lower), upper=log(upper),
+               n.e=n.e, n.c=n.c,
+               studlab = Author,
+               data = ma$rr,
+               method.tau = "REML",
+               sm = "OR")
+```
+
+<h5>Summarizing the Results</h5>
+
+To visualize the results of a meta-analysis conducted with the `metabin()` function, we will use the `summary()` function. It will generate a summary of the analysis:
+```{r Summarize the results - Ratios}
+summary(m.rr)
+```
+
+<h5>Creating the Forest Plot</h5>
+
+To create the forest plot, we will use the `forest()` function. Alongside this function, we will include specific arguments to customize the appearance and content of the forest plot, such as labels, confidence interval formatting, and display options. These arguments ensure the plot is clear, informative, and tailored to the dataset being analyzed.
+```{r Creating the Forest Plot - Ratios, echo=TRUE, fig.height=4, fig.width=10, dpi=600}
+forest(m.rr,
+       smlab = "Arrhythmia Recurrence",
+       layout = "Revman5",
+       sortvar = TE,
+       lab.e = "Experimental", label.left = "Favors Experimental",
+       lab.c = "Control", label.right = "Favors Control",
+       ff.lr = "bold",
+       leftcols = c("studlab", "Year", "n.e", "n.c", "w.random", "effect", "ci"),
+       leftlabs = c("Studies", "Year", "Experimental\nTotal", "Control\nTotal", NA, NA, NA),
+       text.random = "Random effects model",
+       random = TRUE, 
+       common = FALSE,
+       test.overall.random = TRUE,
+       rightcols = FALSE,
+       colgap = "3mm",
+       fs.heading = 12,
+       fs.study = 12, 
+       fs.hetstat = 10, 
+       digits = 2,
+       digits.pval = 2,
+       pooled.totals = TRUE,
+       col.square="darkcyan", col.square.lines="black",
+       prediction = TRUE, col.predict = "#CEF2EE",col.predict.lines = "black", ff.predict = 1)
+```
+<h4>Difference Measures Meta-Analysis</h4>
+
+To perform the meta-analysis of difference measures we will use the `metagen()` function from the `meta` package. We need to provide some instructions for the `metagen()` function. These instructions are known as arguments, which can be one, two, three, or more inputs that the function uses to perform its task. The main arguments of the `metagn()` function are:
+
+<h5>Usefull Formulas</h5>
+
+<h6>Excel Formula for Calculating the Mean Difference (MD)</h6>
+
+`=mean.e - mean.c`
+
+<h6>Excel Formula for Calculating the Standard Error MD</h6>
+
+`=SQRT(((sd.e)ˆ2/n.e) + ((sd.c)ˆ2/n.c))`
+
+<h5>Importing the Dataset</h5>
+
+The entire dataset was converted into a dataframe format for easier handling and compatibility with the R example analysis. The dataframe structure allows seamless data manipulation and analysis using R’s built-in functions and packages. 
+
+```{r Dataset - Differences, include=FALSE}
+ma<-list(los=structure(list(Author = c("Study 1", "Study 2", "Study 3", "Study 4"
+), Year = c(2015, 2014, 2018, 2013), TE = c(-0.27, 0.16, -0.24, 
+-0.45), seTE = c(NA, 0.1173, NA, NA), lower = c(-0.62, NA, -1.4, 
+-0.79), upper = c(0.08, NA, 0.92, -0.11), n.e = c(30, 50, 25, 
+280), n.c = c(30, 50, 25, 280), Subgroup_1 = c("Drug A", "Drug A", 
+"Drug B", "Drug B"), Variable_1 = c(70, 80, 50, 20)), row.names = c(NA, 
+-4L), class = "data.frame"))
+```
+
+```{r View Dataset - Differences, echo=TRUE}
+ma$los
+```
+
+<h5>Performing the Meta-Analysis</h5>
+```{r Performing the Meta-Analysis - Differences, echo=TRUE}
+m.los<-metagen(TE=TE, seTE=seTE, lower=lower, upper=upper,
+               n.e=n.e, n.c=n.c,
+               studlab = Author,
+               data = ma$los,
+               method.tau = "REML",
+               sm = "MD")
+```
+
+<h5>Summarizing the Results</h5>
+
+To visualize the results of a meta-analysis conducted with the `metabin()` function, we will use the `summary()` function. It will generate a summary of the analysis:
+```{r Summarize the results - Differences}
+summary(m.los)
+```
+
+<h5>Creating the Forest Plot</h5>
+
+To create the forest plot, we will use the `forest()` function. Alongside this function, we will include specific arguments to customize the appearance and content of the forest plot, such as labels, confidence interval formatting, and display options. These arguments ensure the plot is clear, informative, and tailored to the dataset being analyzed.
+```{r Creating the Forest Plot - Differences, echo=TRUE, fig.height=4, fig.width=10, dpi=600}
+forest(m.rr,
+       smlab = "Length of Stay",
+       layout = "Revman5",
+       sortvar = TE,
+       lab.e = "Experimental", label.left = "Favors Experimental",
+       lab.c = "Control", label.right = "Favors Control",
+       ff.lr = "bold",
+       leftcols = c("studlab", "Year", "n.e", "n.c", "w.random", "effect", "ci"),
+       leftlabs = c("Studies", "Year", "Experimental\nTotal", "Control\nTotal", NA, NA, NA),
+       text.random = "Random effects model",
+       random = TRUE, 
+       common = FALSE,
+       test.overall.random = TRUE,
+       rightcols = FALSE,
+       colgap = "3mm",
+       fs.heading = 12,
+       fs.study = 12, 
+       fs.hetstat = 10, 
+       digits = 2,
+       digits.pval = 2,
+       pooled.totals = TRUE,
+       col.square="darkcyan", col.square.lines="black",
+       prediction = TRUE, col.predict = "#CEF2EE",col.predict.lines = "black", ff.predict = 1)
+```
+<h4>Working with different confidence intervals:</h4>
+In meta-analyses, studies may report confidence intervals (CIs) with different levels of confidence (e.g., 90%, 95%, or 99%). To standardize the data for analysis, you must first calculate the Standard Error for all studies using their reported CIs, regardless of the confidence level.
+Once the SE is calculated, the treatment effect and its SE can be used uniformly in the metagen() function.
+
+<h5>Excel Formula for Calculating the SE from 90% Confidence Interval - Studies with > 60 patients in each group</h5>
+
+<h6>Ratio Measures</h6>
+`=(log(Upper_CI) - log(Lower_CI))/3.29`
+
+<h6>Difference Measures</h6>
+`=(Upper_CI - Lower_CI)/3.29`
+
+<h5>Excel Formula for Calculating the SE from 95% Confidence Interval - Studies with > 60 patients in each group</h5>
+
+<h6>Ratio Measures</h6>
+`=(log(Upper_CI) - log(Lower_CI))/3.92`
+
+<h6>Difference Measures</h6>
+`=(Upper_CI - Lower_CI)/3.92`
+
+<h5>Excel Formula for Calculating the SE from 99% Confidence Interval - Studies with > 60 patients in each group</h5>
+
+<h6>Ratio Measures</h6>
+`=(log(Upper_CI) - log(Lower_CI))/5.15`
+
+<h6>Difference Measures</h6>
+`=(Upper_CI - Lower_CI)/5.15`
+
+<h5>Calculating the SE - Studies with < 60 patients in each group</h5>
+
+When the sample size in each group is small (e.g., fewer than 60 participants per group), confidence intervals should be calculated using the t-distribution instead of the normal distribution. The constants 3.92 , 3.29 , and 5.15 (derived from the normal distribution) must be replaced with larger values specific to the t distribution, accounting for the sample size and degrees of freedom (df).
+
+1. Before calculating the t statistic and subsequent SE for confidence intervals, it is essential to clearly define: (a) Confidence level; (b) Sample size in control (n.c) and experimental (n.e) group
+
+2. In an Excel cell, type the following formula using the variables:
+`=tinv(1-CI, n.e+n.c-2)`
+
+3. Calculate the SE Using the t-Statistic:
+
+<h6>Ratio Measures</h6>
+`=(log(Upper_CI) - log(Lower_CI))/2*t`
+
+<h6>Difference Measures</h6>
+`=(Upper_CI - Lower_CI)/2*t`
+
+<h4>References:</h4>
+
+1. Core Team (2023). R: A Language and Environment for Statistical Computing. R Foundation for Statistical Computing, Vienna, Austria. <https://www.R-project.org/>
+2. RStudio Team (2020). RStudio: Integrated Development for R. RStudio, PBC, Boston, MA URL http://www.rstudio.com/.
+3. meta package: Balduzzi S, Rücker G, Schwarzer G. How to perform a meta-analysis with R: a practical tutorial. In: Evidence-Based Mental Health. 22nd ed.; 2019:153-160.
+4. readxl package: Wickham H, Bryan J (2023). readxl: Read Excel Files. https://readxl.tidyverse.org, https://github.com/tidyverse/readxl.
+
+
+
+<a href="https://gewehrdm.github.io" style="
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 20px 0;
+    background-color: #1D3557; /* Azul escuro */
+    color: white; /* Texto branco */
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
+"
+    onmouseover="this.style.backgroundColor='#457B9D'; this.style.transform='scale(1.05)';"
+    onmouseout="this.style.backgroundColor='#1D3557'; this.style.transform='scale(1)';"
+    onmousedown="this.style.transform='scale(0.95)';"
+    onmouseup="this.style.transform='scale(1.05)';">
+    ⬅ Back to Menu
+</a>

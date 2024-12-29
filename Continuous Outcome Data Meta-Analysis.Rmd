@@ -67,7 +67,7 @@ ma$bmi
 
 <h4>Performing the Meta-Analysis</h4>
 
-To perform the meta-analysis of binary outcome data we will use the `metacont()` function from the `meta` package. We need to provide some instructions for the `metacont()` function. These instructions are known as arguments, which can be one, two, three, or more inputs that the function uses to perform its task. The main arguments of the `metacont()` function are:
+To perform the meta-analysis of continuous outcome data we will use the `metacont()` function from the `meta` package. We need to provide some instructions for the `metacont()` function. These instructions are known as arguments, which can be one, two, three, or more inputs that the function uses to perform its task. The main arguments of the `metacont()` function are:
 
 <h6> Scenario 1 - Mean and SD Available</h6>
 ```{r Performing the Meta-Analysis - Scenario 1, echo=TRUE}
