@@ -84,4 +84,12 @@ forest(m.acm,
        prediction = TRUE, col.predict = "#CEF2EE",col.predict.lines = "black", ff.predict = 1)
 ```
 
+References:
+1. Core Team (2023). R: A Language and Environment for Statistical Computing. R Foundation for Statistical Computing, Vienna, Austria. <https://www.R-project.org/>
+
+2. RStudio Team (2020). RStudio: Integrated Development for R. RStudio, PBC, Boston, MA URL http://www.rstudio.com/.
+
+3. meta package: Balduzzi S, Rücker G, Schwarzer G. How to perform a meta-analysis with R: a practical tutorial. In: Evidence-Based Mental Health. 22nd ed.; 2019:153-160.
+
+4. readxl package: Wickham H, Bryan J (2023). readxl: Read Excel Files. https://readxl.tidyverse.org, https://github.com/tidyverse/readxl.
 
