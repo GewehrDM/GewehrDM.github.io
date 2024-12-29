@@ -39,7 +39,7 @@ library(readxl)
 
 The entire dataset was converted into a dataframe format for easier handling and compatibility with the R example analysis. The dataframe structure allows seamless data manipulation and analysis using R’s built-in functions and packages. 
 
-```{r Dataset, echo=FALSE}
+```{r Dataset, include=FALSE}
 ma<-list(acm=structure(list(Author = c("Almendro-Delia et al.", "ATLANTIC Trial", 
 "Danchin et al.", "Load&Go Trial", "CIPAMI Trial", "Fabris et al.", 
 "Postma et al.", "Dorler et al.", "Lupi et al.", "Redfors et al.", 
