@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My R Analysis Site</title>
+    <title>Binary Outcome Data Meta Analysis</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -62,19 +62,35 @@
 </head>
 <body>
     <header>
-        <h1>My R Analysis Site</h1>
-        <p>Explore my R analyses and projects</p>
+        <h1>Binary Outcome Data Meta Analysis</h1>
     </header>
+
+    <!-- Back to Menu Button at the Top -->
     <div class="container">
-        <h2>Available Analyses</h2>
-        <ul>
-            <li><a href="Binary-Outcome-Data-Meta-Analysis.html">Binary Outcome Data Meta Analysis</a></li>
-        </ul>
-        <h2>About</h2>
-        <p>This site showcases my R projects and analyses, converted into HTML for easy viewing.</p>
+        <a href="index.html" class="back-button">⬅ Back to Menu</a>
     </div>
 
-    <!-- Back to Menu Button -->
+    <!-- Main Content -->
+    <div class="container">
+        <h2>Overview</h2>
+        <p>This analysis focuses on binary outcome data meta-analysis using the R `meta` package.</p>
+
+        <h3>R Code</h3>
+        <pre>
+library(meta)
+m.acm <- metabin(event.e, n.e, event.c, n.c,
+                 data = ma$acm,
+                 method = "MH",
+                 method.tau = "DL",
+                 sm = "RR",
+                 studlab = Author)
+        </pre>
+
+        <h3>Results</h3>
+        <p>The analysis demonstrates...</p>
+    </div>
+
+    <!-- Back to Menu Button at the Bottom -->
     <div class="container">
         <a href="index.html" class="back-button">⬅ Back to Menu</a>
     </div>
