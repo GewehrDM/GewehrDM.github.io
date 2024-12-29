@@ -38,7 +38,7 @@ ma<-list(acm=structure(list(Author = c("Almendro-Delia et al.", "ATLANTIC Trial"
 -14L), class = "data.frame"))
 ```
 
-To perform the meta-analysis of binary outcome data we will use the metabin () function from the 'meta' package. We need to provide some instructions for the 'metabin()' function. These instructions are known as arguments, which can be one, two, three, or more inputs that the function uses to perform its task. The main arguments of the 'metabin()' function are:
+To perform the meta-analysis of binary outcome data we will use the metabin () function from the 'meta' package. We need to provide some instructions for the 'metabin()' function. These instructions are known as arguments, which can be one, two, three, or more inputs that the function uses to perform its task. The main arguments of the 'metabin()' function are:dfvjodfnvuidfnvodf
 
 ```{r Performing the Meta-Analysis}
 m.acm <- metabin(event.e, n.e, event.c, n.c,
