@@ -38,8 +38,6 @@ library(readxl)
 
 <h4>Ratio Measures Meta-Analysis</h4>
 
-To perform the meta-analysis of ratio measures we will use the `metagen()` function from the `meta` package. We need to provide some instructions for the `metagen()` function. These instructions are known as arguments, which can be one, two, three, or more inputs that the function uses to perform its task. The main arguments of the `metagen()` function are:
-
 <h5>Usefull Formulas</h5>
 
 <h6>Excel Formula for Calculating the Odds Ratio (OR)</h6>
@@ -77,6 +75,9 @@ ma$rr
 ```
 
 <h5>Performing the Meta-Analysis</h5>
+
+To perform the meta-analysis of ratio measures we will use the `metagen()` function from the `meta` package. We need to provide some instructions for the `metagen()` function. These instructions are known as arguments, which can be one, two, three, or more inputs that the function uses to perform its task. The main arguments of the `metagen()` function are:
+
 ```{r Performing the Meta-Analysis - Ratios, echo=TRUE}
 m.rr<-metagen(TE=log(TE), seTE=seTE, lower=log(lower), upper=log(upper),
                n.e=n.e, n.c=n.c,
@@ -123,8 +124,6 @@ forest(m.rr,
 ```
 <h4>Difference Measures Meta-Analysis</h4>
 
-To perform the meta-analysis of difference measures we will use the `metagen()` function from the `meta` package. We need to provide some instructions for the `metagen()` function. These instructions are known as arguments, which can be one, two, three, or more inputs that the function uses to perform its task. The main arguments of the `metagen()` function are:
-
 <h5>Usefull Formulas</h5>
 
 <h6>Excel Formula for Calculating the Mean Difference (MD)</h6>
@@ -154,6 +153,9 @@ ma$los
 ```
 
 <h5>Performing the Meta-Analysis</h5>
+
+To perform the meta-analysis of difference measures we will use the `metagen()` function from the `meta` package. We need to provide some instructions for the `metagen()` function. These instructions are known as arguments, which can be one, two, three, or more inputs that the function uses to perform its task. The main arguments of the `metagen()` function are:
+
 ```{r Performing the Meta-Analysis - Differences, echo=TRUE}
 m.los<-metagen(TE=TE, seTE=seTE, lower=lower, upper=upper,
                n.e=n.e, n.c=n.c,
