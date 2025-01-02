@@ -176,7 +176,7 @@ summary(m.los)
 
 To create the forest plot, we will use the `forest()` function. Alongside this function, we will include specific arguments to customize the appearance and content of the forest plot, such as labels, confidence interval formatting, and display options. These arguments ensure the plot is clear, informative, and tailored to the dataset being analyzed.
 ```{r Creating the Forest Plot - Differences, echo=TRUE, fig.height=4, fig.width=10, dpi=600}
-forest(m.rr,
+forest(m.los,
        smlab = "Length of Stay",
        layout = "Revman5",
        sortvar = TE,
