@@ -4,6 +4,7 @@ author: "Douglas Mesadri Gewehr, MD - Meta-Analysis Academy"
 date: "2024-12-29"
 output: html_document
 ---
+
 <a href="https://gewehrdm.github.io" style="
     display: inline-block;
     padding: 10px 15px;
@@ -20,24 +21,24 @@ output: html_document
     onmouseover="this.style.backgroundColor='#457B9D'; this.style.transform='scale(1.05)';"
     onmouseout="this.style.backgroundColor='#1D3557'; this.style.transform='scale(1)';"
     onmousedown="this.style.transform='scale(0.95)';"
-    onmouseup="this.style.transform='scale(1.05)';">
-    ⬅ Back to Menu
-</a>
+    onmouseup="this.style.transform='scale(1.05)';"> ⬅ Back to Menu </a>
 
-<h4>Overview</h4>
+### Overview
 
 This tutorial focuses on binary outcome data meta-analysis using the R `meta` package.
 
-<h4>Load Packages</h4>
+#### Load Packages
 
 ```{r Loading the Packages, message=FALSE, warning=FALSE}
 library(meta)
 library(readxl)
 ```
 
-<h4>Importing the Dataset</h4>
+------------------------------------------------------------------------
 
-The entire dataset was converted into a dataframe format for easier handling and compatibility with the R example analysis. The dataframe structure allows seamless data manipulation and analysis using R’s built-in functions and packages. 
+#### Importing the Dataset
+
+The entire dataset was converted into a dataframe format for easier handling and compatibility with the R example analysis. The dataframe structure allows seamless data manipulation and analysis using R’s built-in functions and packages.
 
 ```{r Dataset, include=FALSE}
 ma<-list(acm=structure(list(Author = c("Almendro-Delia et al.", "ATLANTIC Trial", 
@@ -71,9 +72,12 @@ ma<-list(acm=structure(list(Author = c("Almendro-Delia et al.", "ATLANTIC Trial"
 ma$acm
 ```
 
-<h4>Performing the Meta-Analysis</h4>
+------------------------------------------------------------------------
+
+#### Performing the Meta-Analysis
 
 To perform the meta-analysis of binary outcome data we will use the `metabin()` function from the `meta` package. We need to provide some instructions for the `metabin()` function. These instructions are known as arguments, which can be one, two, three, or more inputs that the function uses to perform its task. The main arguments of the `metabin()` function are:
+
 ```{r Performing the Meta-Analysis, echo=TRUE}
 m.acm <- metabin(event.e, n.e, event.c, n.c,
                  data = ma$acm,
@@ -83,16 +87,22 @@ m.acm <- metabin(event.e, n.e, event.c, n.c,
                  studlab = Author)
 ```
 
-<h4>Summarizing the Results</h4>
+------------------------------------------------------------------------
+
+#### Summarizing the Results
 
 To visualize the results of a meta-analysis conducted with the `metabin()` function, we will use the `summary()` function. It will generate a summary of the analysis:
+
 ```{r Summarize the results}
 summary(m.acm)
 ```
 
-<h4>Creating the Forest Plot</h4>
+------------------------------------------------------------------------
+
+#### Creating the Forest Plot
 
 To create the forest plot, we will use the `forest()` function. Alongside this function, we will include specific arguments to customize the appearance and content of the forest plot, such as labels, confidence interval formatting, and display options. These arguments ensure the plot is clear, informative, and tailored to the dataset being analyzed.
+
 ```{r Creating the Forest Plot, echo=TRUE, fig.height=6, fig.width=11, dpi=600}
 forest(m.acm,
        smlab = "All-cause Mortality",
@@ -116,18 +126,22 @@ forest(m.acm,
        digits.pval = 2,
        pooled.events = TRUE,
        pooled.totals = TRUE,
+       print.I2.ci = TRUE,
        col.square="darkcyan", col.square.lines="black",
        prediction = TRUE, col.predict = "#CEF2EE",col.predict.lines = "black", ff.predict = 1)
 ```
 
-<h4>References:</h4>
+------------------------------------------------------------------------
 
-1. Core Team (2023). R: A Language and Environment for Statistical Computing. R Foundation for Statistical Computing, Vienna, Austria. <https://www.R-project.org/>
-2. RStudio Team (2020). RStudio: Integrated Development for R. RStudio, PBC, Boston, MA URL http://www.rstudio.com/.
-3. meta package: Balduzzi S, Rücker G, Schwarzer G. How to perform a meta-analysis with R: a practical tutorial. In: Evidence-Based Mental Health. 22nd ed.; 2019:153-160.
-4. readxl package: Wickham H, Bryan J (2023). readxl: Read Excel Files. https://readxl.tidyverse.org, https://github.com/tidyverse/readxl.
+#### References:
 
+1.  Core Team (2023). R: A Language and Environment for Statistical Computing. R Foundation for Statistical Computing, Vienna, Austria. <https://www.R-project.org/>
 
+2.  RStudio Team (2020). RStudio: Integrated Development for R. RStudio, PBC, Boston, MA URL <http://www.rstudio.com/>.
+
+3.  meta package: Balduzzi S, Rücker G, Schwarzer G. How to perform a meta-analysis with R: a practical tutorial. In: Evidence-Based Mental Health. 22nd ed.; 2019:153-160.
+
+4.  readxl package: Wickham H, Bryan J (2023). readxl: Read Excel Files. <https://readxl.tidyverse.org>, <https://github.com/tidyverse/readxl>.
 
 <a href="https://gewehrdm.github.io" style="
     display: inline-block;
@@ -145,6 +159,4 @@ forest(m.acm,
     onmouseover="this.style.backgroundColor='#457B9D'; this.style.transform='scale(1.05)';"
     onmouseout="this.style.backgroundColor='#1D3557'; this.style.transform='scale(1)';"
     onmousedown="this.style.transform='scale(0.95)';"
-    onmouseup="this.style.transform='scale(1.05)';">
-    ⬅ Back to Menu
-</a>
+    onmouseup="this.style.transform='scale(1.05)';"> ⬅ Back to Menu </a>
