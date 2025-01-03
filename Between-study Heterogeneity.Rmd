@@ -176,26 +176,10 @@ In sum, it is advisable to not resort to one measure only when characterizing th
 
 ------------------------------------------------------------------------
 
-### Example 2:
+### References
 
-![](images/Unknown1234.png){alt="vv dfdv fv"}
+1.  Higgins JPT, Thompson SG. Quantifying heterogeneity in a meta-analysis. Statistics in Medicine. 2002;21(11):1539-1558.
 
-<div>
-
-**Here is how we could report the amount of heterogeneity we found in our example 1:**
-
-------------------------------------------------------------------------
-
-Experimental group was associated with lower rates of all-cause mortality (RR 0.73; 95% CI 0.57 - 0.93; p = 0.01; I^2^ = 74%) compared with control. The prediction interval (PI) ranged from 0.33 to 1.58 indicating that negative intervention effects cannot be ruled out for future studies.
-
-------------------------------------------------------------------------
-
-</div>
-
-### Reference
-
-1.  Higgins JPT, Thompson SG. Quantifying heterogeneity in a meta-analysis. Statistics in Medicine. 2002;21(11):1539-1558. [@higgins2002]
-
-2.  IntHout J, Ioannidis JPA, Rovers MM, et al. Plea for routinely presenting prediction intervals in meta-analysis. BMJ Open;2016;**6:**e010247. [@inthout2016]
+2.  IntHout J, Ioannidis JPA, Rovers MM, et al. Plea for routinely presenting prediction intervals in meta-analysis. BMJ Open;2016;**6:**e010247.
 
 3.  Higgins JPT, Thomas J, Chandler J, Cumpston M, Li T, Page MJ, Welch VA (editors). Cochrane Handbook for Systematic Reviews of Interventions version 6.5 (updated August 2024). Cochrane, 2024. Available from [www.training.cochrane.org/handbook](www.training.cochrane.org/handbook).
