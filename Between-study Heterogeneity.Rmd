@@ -134,6 +134,8 @@ These three measures are related to heterogeneity in meta-analysis, but they ser
 
         -   [Meta-Analyses with *I^2^* = 0:]{.underline} A substantial part of meta-analyses have an estimated of I^2^ 0. However, there is typically very large uncertainty about the exact amount of heterogeneity, and this is demonstrated by very large 95% CIs for the values of I^2^. So, when I^2^ = 0 , rely on the prediction interval to assess variability and generalization across studies.
 
+--------
+
 #### Summary
 
 +-------------------------+------------------------------------------------------+----------------------------------------------------------------+----------------------------------------------------------------+
