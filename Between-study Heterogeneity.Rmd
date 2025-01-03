@@ -6,6 +6,24 @@ output: html_document
 bibliography: references.bib
 ---
 
+<a href="https://gewehrdm.github.io" style="
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 20px 0;
+    background-color: #1D3557; /* Azul escuro */
+    color: white; /* Texto branco */
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
+"
+    onmouseover="this.style.backgroundColor='#457B9D'; this.style.transform='scale(1.05)';"
+    onmouseout="this.style.backgroundColor='#1D3557'; this.style.transform='scale(1)';"
+    onmousedown="this.style.transform='scale(0.95)';"
+    onmouseup="this.style.transform='scale(1.05)';"> ⬅ Back to Menu </a>
+
 ### Difference Between Fixed-Effects and Random-Effects Models in Meta-Analysis? 
 
 First, we need to understand the differences between fixed-effects and random-effects models. Both are methods used to combine the results of individual studies into an overall summary estimate!
@@ -185,3 +203,21 @@ In sum, it is advisable to not resort to one measure only when characterizing th
 2.  IntHout J, Ioannidis JPA, Rovers MM, et al. Plea for routinely presenting prediction intervals in meta-analysis. BMJ Open;2016;**6:**e010247.
 
 3.  Higgins JPT, Thomas J, Chandler J, Cumpston M, Li T, Page MJ, Welch VA (editors). Cochrane Handbook for Systematic Reviews of Interventions version 6.5 (updated August 2024). Cochrane, 2024. Available from [www.training.cochrane.org/handbook](www.training.cochrane.org/handbook).
+
+<a href="https://gewehrdm.github.io" style="
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 20px 0;
+    background-color: #1D3557; /* Azul escuro */
+    color: white; /* Texto branco */
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
+"
+    onmouseover="this.style.backgroundColor='#457B9D'; this.style.transform='scale(1.05)';"
+    onmouseout="this.style.backgroundColor='#1D3557'; this.style.transform='scale(1)';"
+    onmousedown="this.style.transform='scale(0.95)';"
+    onmouseup="this.style.transform='scale(1.05)';"> ⬅ Back to Menu </a>
