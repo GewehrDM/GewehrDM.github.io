@@ -132,7 +132,7 @@ These three measures are related to heterogeneity in meta-analysis, but they ser
 
         -   ***I***^**2**^ **≥ 50:** substantial heterogeneity.
 
-4.  **Prediction Interval (PI)**
+4.  **Prediction Interval (PI) - "**What could future studies observe?"
 
     -   **What it does:** Provides a range where the true effect of a future study is expected to fall. Accounts for both within-study sampling error and between-study variability. Complements Tau^2^ and I^2^ , which describe variability but do not predict future outcomes. Prediction intervals (PIs) provide the expected range of true effects in future studies, accounting for both within-study error and between-study variability ( Tau^2^ ). Unlike confidence intervals (CIs), which estimate the precision of the pooled effect, PIs reflect the variability in potential real-world applications.
 
@@ -156,21 +156,21 @@ These three measures are related to heterogeneity in meta-analysis, but they ser
 
 #### Summary
 
-+-------------------------+------------------------------------------------------+----------------------------------------------------------------+----------------------------------------------------------------+
-| Measure                 | **What it does**                                     | Question It Answers                                            | Interpretation                                                 |
-+=========================+======================================================+================================================================+================================================================+
-| **Q ( Chi^2^ )**        | Tests if heterogeneity is present.                   | “Is there heterogeneity?”                                      | Significant Q = heterogeneity exists.                          |
-+-------------------------+------------------------------------------------------+----------------------------------------------------------------+----------------------------------------------------------------+
-| **Tau^2^**              | Quantifies the absolute heterogeneity.               | “How much heterogeneity is there?”                             | Larger Tau^2^ = more between-study variability.                |
-|                         |                                                      |                                                                |                                                                |
-|                         | [*Absolute measure of heterogeneity*]{.underline}    |                                                                |                                                                |
-+-------------------------+------------------------------------------------------+----------------------------------------------------------------+----------------------------------------------------------------+
-| ***I^2^***              | Proportion of variability due to heterogeneity.      | “What percentage of variability is due to heterogeneity?”      | Higher I^2^ = more heterogeneity.                              |
-|                         |                                                      |                                                                |                                                                |
-|                         | [*Relative measure of heterogeneity*]{.underline}    |                                                                |                                                                |
-+-------------------------+------------------------------------------------------+----------------------------------------------------------------+----------------------------------------------------------------+
-| **Prediction Interval** | Provides a range for true effects in future studies. | Adds clinical relevance by predicting outcomes in new studies. | Wide PI = Greater uncertainty; Narrow PI = Consistent effects. |
-+-------------------------+------------------------------------------------------+----------------------------------------------------------------+----------------------------------------------------------------+
++-------------------------+------------------------------------------------------+-----------------------------------------------------------+----------------------------------------------------------------+
+| Measure                 | **What it does**                                     | Question It Answers                                       | Interpretation                                                 |
++=========================+======================================================+===========================================================+================================================================+
+| **Q ( Chi^2^ )**        | Tests if heterogeneity is present.                   | “Is there heterogeneity?”                                 | Significant Q = heterogeneity exists.                          |
++-------------------------+------------------------------------------------------+-----------------------------------------------------------+----------------------------------------------------------------+
+| **Tau^2^**              | Quantifies the absolute heterogeneity.               | “How much heterogeneity is there?”                        | Larger Tau^2^ = more between-study variability.                |
+|                         |                                                      |                                                           |                                                                |
+|                         | [*Absolute measure of heterogeneity*]{.underline}    |                                                           |                                                                |
++-------------------------+------------------------------------------------------+-----------------------------------------------------------+----------------------------------------------------------------+
+| ***I^2^***              | Proportion of variability due to heterogeneity.      | “What percentage of variability is due to heterogeneity?” | Higher I^2^ = more heterogeneity.                              |
+|                         |                                                      |                                                           |                                                                |
+|                         | [*Relative measure of heterogeneity*]{.underline}    |                                                           |                                                                |
++-------------------------+------------------------------------------------------+-----------------------------------------------------------+----------------------------------------------------------------+
+| **Prediction Interval** | Provides a range for true effects in future studies. | What could future studies observe?                        | Wide PI = Greater uncertainty; Narrow PI = Consistent effects. |
++-------------------------+------------------------------------------------------+-----------------------------------------------------------+----------------------------------------------------------------+
 
 In sum, it is advisable to not resort to one measure only when characterizing the heterogeneity of a meta-analysis. It is recommended to at least always report 𝐼^2^ (with confidence intervals), as well as prediction intervals, and interpret the results accordingly.
 
@@ -196,11 +196,37 @@ In sum, it is advisable to not resort to one measure only when characterizing th
 
 ***Third, What percentage of variability is due to heterogeneity? (not chance)*** - We see that the I^2^ = 74% (95% CI 55% - 85%) using Higgins and Thompson’s “rule of thumb”, we can characterize this amount of heterogeneity as substantial.
 
+**Fourth, What could future studies observe?** - The PI is 0.33–1.58, which spans both below and above the null hypothesis (1.0). This interval suggests that while the overall pooled effect size indicates benefit (e.g., an RR less than 1), future studies could observe results ranging from a substantial benefit (RR = 0.33) to potential harm (RR = 1.58).
+
 ------------------------------------------------------------------------
 
 #### Here is how we could report the amount of heterogeneity we found in our example 1:
 
 *"Experimental group was associated with lower rates of all-cause mortality (RR 0.73; 95% CI 0.57 - 0.93; p = 0.01; I^2^ = 74%) compared with control group. The 95% PI ranged from 0.33 to 1.58 indicating that negative intervention effects cannot be ruled out for future studies."*
+
+------------------------------------------------------------------------
+
+### Example 2:
+
+![](images/574615e3-f8f8-49aa-bed7-352ffc1f9bd9.png)
+
+------------------------------------------------------------------------
+
+#### Interpreting the results:
+
+***First, Is there heterogeneity?*** - We see that Q (Chi^2^), the Test of heterogeneity, is 31.87. This is a lot more than what we would expect based on the number of studies −1 = 13 degrees of freedom (df) in this analysis. Consequentially, the heterogeneity test is significant (p \< 0.01).
+
+***Second, How much heterogeneity is there?*** - We see that Tau^2^ = 0.0587, indicating that some between-study heterogeneity exists in our data.
+
+***Third, What percentage of variability is due to heterogeneity? (not chance)*** - We see that the I^2^ = 59% (95% CI 26% - 77%) using Higgins and Thompson’s “rule of thumb”, we can characterize this amount of heterogeneity as substantial.
+
+**Fourth, What could future studies observe?** - The PI is 0.17–0.55. This narrow range does not cross the null hypothesis (RR = 1.0), indicating that future studies are likely to observe consistent beneficial effects of the intervention. The results suggest robust evidence for treatment efficacy, with little variability in outcomes expected in different settings.
+
+------------------------------------------------------------------------
+
+#### Here is how we could report the amount of heterogeneity we found in our example 2:
+
+*"The experimental group was associated with lower rates of cardiovascular events compared to the control group (RR: 0.31; 95% CI: 0.25–0.38; p \< 0.01 ; I^2^ = 59% ). The 95% PI ranged from 0.17 to 0.55, suggesting that future studies are expected to observe consistent beneficial effects".*
 
 ------------------------------------------------------------------------
 
