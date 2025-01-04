@@ -79,7 +79,7 @@ This is precisely why methods for assessing publication bias focus on the issue 
 It is common practice to assess small-study effects using funnel plots. A funnel plot is a scatter plot that displays:
 
 1.  [**X-axis:**]{.underline} the ***observed effect** sizes of studies*;
-2.  [**Y-axis:**]{.underline} the ***standard error*** of the observed effect sizes of studies. Typically, the y-axis is inverted in funnel plots, so higher positions on the plot correspond to lower standard errors, indicating more precise estimates.
+2.  [**Y-axis:**]{.underline} the ***standard error*** or ***precision (1/se)*** of the observed effect sizes of studies. Typically, the y-axis is inverted in funnel plots, so higher positions on the plot correspond to lower standard errors, indicating more precise estimates.
 3.  [**The vertical line in the middle of the funnel:**]{.underline} represents the pooled effect estimate (either in random-effects or fixed-effects models).
 4.  The plot also includes the idealized funnel shape that represents the expected distribution of studies in the absence of bias.
 
@@ -99,7 +99,7 @@ In this example there are 2 small studies with very low effect sizes to “balan
 
 Now, let’s explore an example of funnel plot asymmetry:
 
-![](images/Screenshot 2025-01-03 at 18.24.27.png)
+![](images/Screenshot%202025-01-03%20at%2018.24.27.png)
 
 In this case, the studies deviate from the idealized symmetrical funnel shape, suggesting the presence of small-study effects or potential publication bias.
 
@@ -133,7 +133,7 @@ In the funnel plot, the standard error of the treatment estimates is plotted on 
 
 Studies appear to be **MISSING** in areas of statistical **NON-SIGNIFICANT** or **SIGNIFICANT NEGATIVE/LOWER** effect (flattened in orange) **➤** Increase the possibility of that the asymmetry is due to publication bias.
 
-See the example below:
+[See the example below:]{.underline}
 
 ![The green ellipse indicates likely areas where ‘‘missing’’ studies are expected.](images/ea1.png)
 
@@ -143,7 +143,7 @@ See the example below:
 
 Studies appear to be **MISSING** in areas of **HIGHER STATISTICAL SIGNIFICANCE** (flattened in pink) **➤** Reduces the plausibility that publication bias.
 
-See the example below:
+[See the example below:]{.underline}
 
 ![](images/ea2.png)
 
@@ -229,7 +229,6 @@ summary(m.acm)
 ```{r fig.height=7, fig.width=8, dpi=600}
 
 funnel(m.acm,
-       
        studlab = TRUE, 
        bg = "lightblue", 
        cex = 2,
@@ -250,8 +249,6 @@ title("Funnel Plot for All-Cause Mortality")
 # Define fill colors for contour
 
 funnel(m.acm,
-       yaxis = "invse",
-       ylab = "Precision (1/SE)",
        studlab = TRUE, 
        bg = "lightblue", 
        cex = 2,
@@ -260,11 +257,11 @@ funnel(m.acm,
        fixed = F,
        contour = c(0.95, 0.99))
 
-legend(x = 5.2, y = 21,
+legend(x = 5.2, y = 0.01,
        legend = c("p ≥ 0.05", "p < 0.05", "p < 0.01"),
        fill = c("white" , "#808080", "#E6E6E6"))
 
-title("Example A\nContour-Enhanced Funnel Plot for All-Cause Mortality")
+title("Contour-Enhanced Funnel Plot for All-Cause Mortality")
 
 
 ```
@@ -273,21 +270,57 @@ title("Example A\nContour-Enhanced Funnel Plot for All-Cause Mortality")
 
 ### Tests for Asymmetry Detection in the Funnel Plots
 
-#### Egger’s Regression Test
+Tests for funnel plot asymmetry evaluate whether there is a systematic relationship between intervention effects and study size beyond what would occur by chance, indicating potential small-study effects.
 
-```{r}
-metabias(m.acm, method.bias = "Egger")
+While visual inspection of contour-enhanced funnel plots can highlight “red flags” for publication bias, such as asymmetry, this approach is subjective and lacks explicit rules for defining “too asymmetric.”
 
-metabias(m.acm, method.bias = "Peters")
+Quantitative tests provide a more objective assessment, complementing visual interpretation.
+
+------------------------------------------------------------------------
+
+#### General Recommendations for Applying Tests for Asymmetry Detection
+
+-   Tests for funnel plot asymmetry should only be used when a meta-analysis includes at least 10 studies, as fewer studies lack sufficient power to distinguish random variation from true asymmetry.
+
+-   These tests are also inappropriate when all studies are of similar sizes (i.e., similar standard errors), as this limits their ability to detect asymmetry.
+
+-   When small-study effects are identified, publication bias should be considered one of several possible explanations. While funnel plots and asymmetry tests highlight potential issues, they do not offer solutions.
+
+-   Review authors should note that these tests have low power, so a lack of evidence for asymmetry does not rule out the presence of bias, including publication bias.
+
+------------------------------------------------------------------------
+
+#### Which method to choose?
+
++---------------------------------------------------+-----------------------------+---------------------------+
+| Scenarios                                         | Methods                     | R Syntax                  |
++===================================================+=============================+===========================+
+| Mean Differences                                  | Egger 1997                  | `"Egger"`                 |
++---------------------------------------------------+-----------------------------+---------------------------+
+| Odds Ratios                                       | Harbord 2006 or Peters 2006 | `"Harbord"` \| `"Peters"` |
++---------------------------------------------------+-----------------------------+---------------------------+
+| Risk Ratios                                       | Egger 1997 or Peters 2006   | `"Egger"` \| `"Peters"`   |
+|                                                   |                             |                           |
+| Risk Differences                                  |                             |                           |
++---------------------------------------------------+-----------------------------+---------------------------+
+| Standardized Mean Differences                     | Pustejovsky & Rodgers 2019  | `"Pustejovsky"`           |
++---------------------------------------------------+-----------------------------+---------------------------+
+| Meta-analysis of diagnostic test accuracy studies | Deeks 2005                  | `"Deeks"`                 |
++---------------------------------------------------+-----------------------------+---------------------------+
+
+------------------------------------------------------------------------
+
+#### How to perform the tests for asymmetry detection
+
+To perform the meta-analysis of continuous outcome data we will use the `metabias()` function from the `meta` package. We need to provide some instructions for the `metabias()` function.
+
+```{r Perfoming the test for asymmetry detection}
+metabias(m.acm,
+         method.bias = "Egger",
+         plotit = T)
 ```
 
-#### Peters' Regression Test
-
-```{r}
-
-
-funnel(trimfill(m.acm))
-```
+------------------------------------------------------------------------
 
 ### References:
 
