@@ -227,7 +227,7 @@ summary(m.acm)
 
 ##### Classic Funnel Plot
 
-```{r fig.height=7, fig.width=8, dpi=600}
+```{r Classic funnel plot, fig.height=7, fig.width=8, dpi=600}
 
 funnel(m.acm,
        studlab = TRUE, 
@@ -247,7 +247,7 @@ title("Funnel Plot for All-Cause Mortality")
 
 ##### Contour-Enhanced Funnel Plot
 
-```{r fig.height=7, fig.width=8, dpi=600}
+```{r Contour-Enhanced funnel plot, fig.height=7, fig.width=8, dpi=600}
 # Define fill colors for contour
 
 funnel(m.acm,
