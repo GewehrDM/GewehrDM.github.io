@@ -23,13 +23,21 @@ output: html_document
     onmousedown="this.style.transform='scale(0.95)';"
     onmouseup="this.style.transform='scale(1.05)';"> ⬅ Back to Menu </a>
 
+------------------------------------------------------------------------
+
 ### What is Publication Bias?
+
+------------------------------------------------------------------------
 
 -   Publication bias occurs when the likelihood of a study being published depends on its results. Evidence suggests that studies with statistically significant or hypothesis-confirming results are more likely to be published.
 -   When conducting a systematic search, we are limited to publicly available evidence, such as peer-reviewed articles, preprints, or other accessible reports. Publication bias implies not only missing studies but specifically those with unfavorable or non-significant findings.
 -   Meta-analysis aims to provide an unbiased estimate of the average effect size in a population. However, if the sample is skewed due to publication bias, even statistically “true” estimates may not reflect the actual reality. It’s similar to estimating the size of an iceberg by measuring only its visible tip—leaving the larger, hidden portion unaccounted for.
 
+------------------------------------------------------------------------
+
 ### Addressing Publication Bias in Meta-Analyses
+
+------------------------------------------------------------------------
 
 In meta-analyses, we can apply techniques to partially mitigate the risk of distortions caused by publication and reporting bias. Some of these strategies focus on improving the [study search process]{.underline}, while others involve [statistical adjustments]{.underline}.
 
@@ -50,6 +58,8 @@ In meta-analyses, we can apply techniques to partially mitigate the risk of dist
 ------------------------------------------------------------------------
 
 ### The Small-Study Effects Concept
+
+------------------------------------------------------------------------
 
 1.  **Large Studies:** Because they require significant resources, large studies are almost always published, regardless of their results.
 2.  **Moderate-Sized Studies:** These are at some risk of not being published, especially if their results are non-significant. However, moderate statistical power often allows significant findings, increasing their chances of publication.
@@ -168,6 +178,8 @@ Look after other sources of 'begin' funnel plot asymmetry:
 ------------------------------------------------------------------------
 
 ### Creating a Funnel Plot
+
+------------------------------------------------------------------------
 
 We will now make this more concrete by generating a funnel plot our selves. In the `meta` package, the `funnel()` function can be used to print a funnel plot for a meta-analysis object. Here, we produce a funnel plot for our `metabin()` meta-analysis object.
 
