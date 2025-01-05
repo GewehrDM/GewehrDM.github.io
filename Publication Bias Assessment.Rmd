@@ -55,7 +55,7 @@ In meta-analyses, we can apply techniques to partially mitigate the risk of dist
 2.  **Moderate-Sized Studies:** These are at some risk of not being published, especially if their results are non-significant. However, moderate statistical power often allows significant findings, increasing their chances of publication.
 3.  **Small Studies:** These are most vulnerable to publication bias. Only small studies showing very large (and often exaggerated) effects tend to be published, while those with non-significant results remain unpublished (“file drawer problem”).
 
-**The reasoning is straightforward:** Publication bias exists because **SIGNIFICANT RESULTS** are more likely to be published. Since **LARGER** studies have a **HIGHER** probability of producing significant results due to their larger sample sizes, publication bias disproportionately affects **SMALL STUDIES**, leading to an overrepresentation of large effect sizes in the published literature.
+**The reasoning is straightforward:** Publication bias exists because **SIGNIFICANT RESULTS** are more likely to be published. Since **LARGER** studies have a **HIGHER** probability of producing significant results due to their larger sample sizes, publication bias disproportionately affects **SMALL STUDIES**, leading to an over-representation of large effect sizes in the published literature.
 
 ***Studies with small sample sizes ➞ Low precision (high standard errors) ➞ Wider confidence intervals ➞ Greater likelihood of non-significant results.***
 
@@ -79,8 +79,8 @@ This is precisely why methods for assessing publication bias focus on the issue 
 It is common practice to assess small-study effects using funnel plots. A funnel plot is a scatter plot that displays:
 
 1.  [**X-axis:**]{.underline} the ***observed effect** sizes of studies*;
-2.  [**Y-axis:**]{.underline} the ***standard error*** or ***precision (1/se)*** of the observed effect sizes of studies. Typically, the y-axis is inverted in funnel plots, so higher positions on the plot correspond to lower standard errors, indicating more precise estimates.
-3.  [**The vertical line in the middle of the funnel:**]{.underline} represents the pooled effect estimate (either in random-effects or fixed-effects models).
+2.  [**Y-axis:**]{.underline} the ***standard error*** or ***precision (1/se)*** of the observed effect sizes of studies. Typically, the y-axis is inverted in funnel plots, so higher positions on the plot correspond to lower standard errors, indicating more precise estimates;
+3.  [**The vertical line in the middle of the funnel:**]{.underline} represents the pooled effect estimate (either in random-effects or fixed-effects models);
 4.  The plot also includes the idealized funnel shape that represents the expected distribution of studies in the absence of bias.
 
 Take a look at the example below:
@@ -123,9 +123,9 @@ Usually, the statistical significance thresholds are 0.95 and 0.99, which equals
 
 In the funnel plot, the standard error of the treatment estimates is plotted on the y-axis by default which is likely to be the best choice (*Example A*). However, we also can plot on the y-axis the 1/SE (precision), as demonstrated in *Example B*.
 
-![](images/FPCE-02.png)
+![](images/FPCE-04.png)
 
-![](images/FPCE2-03.png)
+![](images/FPCE2-05.png)
 
 ------------------------------------------------------------------------
 
@@ -168,6 +168,7 @@ We will now make this more concrete by generating a funnel plot our selves. In t
 ```{r Loading the Packages, message=FALSE, warning=FALSE}
 library(meta)
 library(readxl)
+library(dmetar)
 ```
 
 #### Importing the Dataset
@@ -234,7 +235,8 @@ funnel(m.acm,
        cex = 2,
        cex.studlab = 1,
        random = T,
-       fixed = F)
+       fixed = F,
+       backtransf = F)
 
 title("Funnel Plot for All-Cause Mortality")
 
@@ -255,13 +257,14 @@ funnel(m.acm,
        cex.studlab = 1,
        random = T,
        fixed = F,
+       backtransf = F,
        contour = c(0.95, 0.99))
 
-legend(x = 5.2, y = 0.01,
+legend(x = 1.65, y = 0.01,
        legend = c("p ≥ 0.05", "p < 0.05", "p < 0.01"),
        fill = c("white" , "#808080", "#E6E6E6"))
 
-title("Contour-Enhanced Funnel Plot for All-Cause Mortality")
+title("ExampleB\nContour-Enhanced Funnel Plot for All-Cause Mortality")
 
 
 ```
@@ -312,7 +315,7 @@ Quantitative tests provide a more objective assessment, complementing visual int
 
 #### How to perform the tests for asymmetry detection
 
-To perform the meta-analysis of continuous outcome data we will use the `metabias()` function from the `meta` package. We need to provide some instructions for the `metabias()` function.
+To apply the tests to detect asymmetry we will use the `metabias()` function from the `meta` package. We need to provide some instructions for the `metabias()` function.
 
 ```{r Perfoming the test for asymmetry detection}
 metabias(m.acm,
@@ -322,6 +325,88 @@ metabias(m.acm,
 
 ------------------------------------------------------------------------
 
+After running the `metabias()` function, the next step is to annotate the contour-enhanced funnel plot with the results from the test used to assess symmetry. Here’s how to proceed:
+
+```{r Including the legend in the funnel plot, fig.height=7, fig.width=8, dpi=600}
+
+funnel(m.acm,
+       studlab = TRUE, 
+       bg = "lightblue", 
+       cex = 2,
+       cex.studlab = 1,
+       random = T,
+       fixed = F,
+       backtransf = F,
+       contour = c(0.95, 0.99))
+
+title("Contour-Enhanced Funnel Plot for All-Cause Mortality")
+
+legend(x = 1.65, y = 0.01,
+       legend = c("p ≥ 0.05", "p < 0.05", "p < 0.01"),
+       fill = c("white" , "#808080", "#E6E6E6"))
+
+legend(x = -2.9, y = 1.39, bty = "n", cex = 0.8,
+       legend = c(expression(bold("p-val = 0.74 (Egger's Test)")), "intercept: 0.25 (SE = 0.7246) | t = 0.34")) 
+
+```
+
+------------------------------------------------------------------------
+
+#### How to interpret?
+
+1.  [**Look at the Intercept:**]{.underline}
+    -   The intercept (*bias estimate*) represents the expected standardized effect size (z -score) when study precision is zero (i.e., infinite standard error).
+
+    -   A value close to zero suggests symmetry in the funnel plot, indicating no small-study effects or publication bias.
+2.  **Evaluate the Significance of the Intercept:**
+    -   In this example, the intercept is 0.25, which is very close to zero. • The statistical test (t = 0.34, p = 0.74) shows that the intercept is not significantly different from zero (p \> 0.05).
+3.  [**What Does This Mean?**]{.underline}
+    -   Since the intercept is not significantly different from zero, the funnel plot is likely symmetrical.
+
+    -   Symmetry in the funnel plot suggests that small-study effects or publication bias are unlikely to have distorted the results.
+
+------------------------------------------------------------------------
+
+### How to report?
+
+For regression test results, it is usually sufficient to report the value of the intercept, its standard error, as well as the 𝑡 and 𝑝 value. It is common practice to include them alongside visual representations, such as a funnel plot, to provide a clearer context for interpretation.
+
+------------------------------------------------------------------------
+
+#### In the methods section:
+
+[**Examples:**]{.underline}
+
+-   *"The presence of small-study effects was assessed by visual assessment of the contour-enhanced funnel plots and formal Egger regression test.^1-3^"*
+
+-   *"We explored the potential for publication bias by visual inspection of the contour-enhanced funnel plot and Peters' test.^1-3^"*
+
+------------------------------------------------------------------------
+
+#### In the results section:
+
+[**Examples:**]{.underline}
+
+-   *"There was no evidence of small-study effects by visual assessment of the contour-enhanced funnel plots or by Egger regression test (see Supplementary Figure X)."*
+
+-   *"Contour-enhanced funnel plot analysis and Egger regression test detected evidence of publication bias for the primary endpoint (intercept = 1.25, SE = 0.52, t = 2.40 , p = 0.001 ), suggesting potential small-study effects or selective reporting (see Supplementary Figure X)."*
+
+-   *"We did not assess publication bias due to the limited number of studies included (n \< 10), as regression-based methods lack sufficient power to distinguish chance from true asymmetry."*
+
+------------------------------------------------------------------------
+
 ### References:
 
 1.  Peters JL, Sutton AJ, Jones DR, Abrams KR, Rushton L. Contour-enhanced meta-analysis funnel plots help distinguish publication bias from other causes of asymmetry. J Clin Epidemiol. 2008;61(10):991-6.
+
+2.  Sterne JA, Sutton AJ, Ioannidis JP, Terrin N, Jones DR, Lau J, Carpenter J, Rücker G, Harbord RM, Schmid CH, Tetzlaff J, Deeks JJ, Peters J, Macaskill P, Schwarzer G, Duval S, Altman DG, Moher D, Higgins JP. Recommendations for examining and interpreting funnel plot asymmetry in meta-analyses of randomised controlled trials. BMJ. 2011 Jul 22;343:d4002.
+
+3.  Egger M, Davey Smith G, Schneider M, Minder C. Bias in meta-analysis detected by a simple, graphical test. BMJ. 1997 Sep 13;315(7109):629-34.
+
+4.  Harbord RM, Egger M, Sterne JA. A modified test for small-study effects in meta-analyses of controlled trials with binary endpoints. Stat Med. 2006 Oct 30;25(20):3443-57.
+
+5.  Peters JL, Sutton AJ, Jones DR, Abrams KR, Rushton L. Comparison of two methods to detect publication bias in meta-analysis. JAMA. 2006 Feb 8;295(6):676-80.
+
+6.  Pustejovsky JE, Rodgers MA. Testing for funnel plot asymmetry of standardized mean differences. Res Syn Meth. 2019; 10: 57–71.
+
+7.  Deeks JJ, Macaskill P, Irwig L. The performance of tests of publication bias and other sample size effects in systematic reviews of diagnostic test accuracy was assessed. J Clin Epidemiol. 2005 Sep;58(9):882-93.
