@@ -123,9 +123,17 @@ Usually, the statistical significance thresholds are 0.95 and 0.99, which equals
 
 In the funnel plot, the standard error of the treatment estimates is plotted on the y-axis by default which is likely to be the best choice (*Example A*). However, we also can plot on the y-axis the 1/SE (precision), as demonstrated in *Example B*.
 
-![](images/FPCE-04.png)
+------------------------------------------------------------------------
 
-![](images/FPCE2-05.png)
+##### Example A
+
+![](images/FPCE2-06.png)
+
+------------------------------------------------------------------------
+
+##### Example B
+
+![](images/FPCE2-07.png)
 
 ------------------------------------------------------------------------
 
@@ -264,7 +272,7 @@ legend(x = 1.65, y = 0.01,
        legend = c("p ≥ 0.05", "p < 0.05", "p < 0.01"),
        fill = c("white" , "#808080", "#E6E6E6"))
 
-title("ExampleB\nContour-Enhanced Funnel Plot for All-Cause Mortality")
+title("Contour-Enhanced Funnel Plot for All-Cause Mortality")
 
 
 ```
