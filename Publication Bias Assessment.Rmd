@@ -377,7 +377,7 @@ legend(x = -2.9, y = 1.39, bty = "n", cex = 0.8,
 
 ### Duval & Tweedie trim and fill method
 
-```{r}
+```{r Meta-analysis before Trim and Fill method, fig.height=5, fig.width=10, dpi=600}
 
 data(Fleiss1993bin)
 
@@ -385,9 +385,34 @@ m1 <- metabin(d.asp, n.asp, d.plac, n.plac, data = Fleiss1993bin, sm = "OR")
 
 m1
 
+forest(m1,
+       layout = "Revman5",
+       sortvar = TE,
+       lab.e = "Experimental", label.left = "Favors Experimental",
+       lab.c = "Control", label.right = "Favors Control",
+       ff.lr = "bold",
+       leftcols = c("studlab","event.e", "n.e", "event.c", "n.c", "w.random", "effect", "ci" ) ,
+       leftlabs = c("Studies", NA, NA, NA, NA, NA, NA, NA),
+       text.random = "Random effects model",
+       random = TRUE, 
+       common = FALSE,
+       test.overall.random = TRUE,
+       rightcols = FALSE,
+       colgap = "3mm",
+       fs.heading = 12,
+       fs.study = 12, 
+       fs.hetstat = 10, 
+       digits = 2,
+       digits.pval = 2,
+       pooled.events = TRUE,
+       pooled.totals = TRUE,
+       print.I2.ci = TRUE,
+       col.square="darkcyan", col.square.lines="black",
+       prediction = TRUE, col.predict = "#CEF2EE",col.predict.lines = "black", ff.predict = 1)
+
 ```
 
-```{r}
+```{r Trimm and Fill Method, fig.height=7, fig.width=8, dpi=600}
 tf1<-trimfill(m1)
 
 summary(tf1)
@@ -401,8 +426,34 @@ funnel(tf1,
        fixed = F,
        backtransf = F,
        contour = c(0.95, 0.99))
+```
 
-forest(tf1)
+```{r Forest plot after Trim and Fill Method, fig.height=5, fig.width=10, dpi=600}
+
+forest(tf1,
+       layout = "Revman5",
+       sortvar = TE,
+       lab.e = "Experimental", label.left = "Favors Experimental",
+       lab.c = "Control", label.right = "Favors Control",
+       ff.lr = "bold",
+       leftcols = c("studlab","event.e", "n.e", "event.c", "n.c", "w.random", "effect", "ci" ) ,
+       leftlabs = c("Studies", NA, NA, NA, NA, NA, NA, NA),
+       text.random = "Random effects model",
+       random = TRUE, 
+       common = FALSE,
+       test.overall.random = TRUE,
+       rightcols = FALSE,
+       colgap = "3mm",
+       fs.heading = 12,
+       fs.study = 12, 
+       fs.hetstat = 10, 
+       digits = 2,
+       digits.pval = 2,
+       pooled.events = TRUE,
+       pooled.totals = TRUE,
+       print.I2.ci = TRUE,
+       col.square="darkcyan", col.square.lines="black",
+       prediction = TRUE, col.predict = "#CEF2EE",col.predict.lines = "black", ff.predict = 1)
 ```
 
 ------------------------------------------------------------------------
