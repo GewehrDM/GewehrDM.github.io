@@ -375,13 +375,42 @@ legend(x = -2.9, y = 1.39, bty = "n", cex = 0.8,
 
 ------------------------------------------------------------------------
 
-### Duval & Tweedie trim and fill method
+### Duval & Tweedie Trim and Fill Method
+
+------------------------------------------------------------------------
+
+We have now explored various methods to examine and test for small-study effects in our meta-analysis. While identifying the presence of publication bias is valuable, **OUR PRIMARY CONCERN IS UNDERSTANDING ITS MAGNITUDE**. We need to determine whether publication bias has caused only a **MINOR DISTORTION** in our estimates or if it is **SUBSTANTIAL** enough to alter the interpretation of our findings entirely.
+
+The Duval & Tweedie trim-and-fill method (Duval and Tweedie, 2000) is one of the most common techniques for adjusting funnel plot asymmetry. The concept is straightforward: the method identifies and imputes “missing” studies needed to make the funnel plot symmetrical. By adding these imputed studies, the method creates an “extended” dataset, and the pooled effect size calculated from this dataset represents the estimate adjusted for small-study effects.
+
+**This is done using a simple algorithm involving three main steps:**
+
+1.  [**First Step - Trimming:**]{.underline} Removes the asymmetrical small studies to identify the unbiased effect.
+    -   The method starts by identifying outlier studies in the funnel plot—usually small studies that create asymmetry. For example, in our earlier funnel plot, these would be the small studies scattered on the right side.
+
+    -   These outliers are then trimmed, meaning they are temporarily removed from the analysis.
+
+    -   The pooled effect size is recalculated without these studies, typically using a fixed-effect model. This recalculated effect represents a less biased estimate of the mean.
+2.  [**Second Step - Filling:**]{.underline} Adds imputed studies to restore symmetry in the funnel plot.
+    -   The recalculated pooled effect size is then assumed to represent the true center of all effect sizes.
+
+    -   For each trimmed study, a new “mirrored” effect size is created on the opposite side of the funnel. For instance, if the recalculated mean effect is 0.5 and a trimmed study has an effect size of 0.8, the mirrored study is assigned an effect size of 0.2.
+
+    -   These imputed effect sizes are added back into the dataset, making the funnel plot appear symmetrical.
+3.  [**Third Step - Recalculating the Effect Size:**]{.underline}
+    -   After adding the imputed effect sizes, the pooled effect size is recalculated using a random-effects model, which accounts for heterogeneity among studies.
+
+    -   This final pooled effect size serves as the corrected estimate, adjusted for potential publication bias.
+
+------------------------------------------------------------------------
+
+#### Creating the meta-analysis object and the respective forest plot
 
 ```{r Meta-analysis before Trim and Fill method, fig.height=5, fig.width=10, dpi=600}
 
 data(Fleiss1993bin)
 
-m1 <- metabin(d.asp, n.asp, d.plac, n.plac, data = Fleiss1993bin, sm = "OR")
+m1 <- metabin(d.asp, n.asp, d.plac, n.plac, method = "MH", method.tau = "PM", data = Fleiss1993bin, sm = "OR")
 
 m1
 
@@ -412,6 +441,38 @@ forest(m1,
 
 ```
 
+------------------------------------------------------------------------
+
+#### Creating the Contour-Enhanced Funnel Plot
+
+```{r Contour-Enhanced FP before Trim and Fill method, fig.height=7, fig.width=8, dpi=600}
+
+funnel(m1,
+       studlab = TRUE, 
+       bg = "lightblue", 
+       cex = 2,
+       cex.studlab = 1,
+       random = T,
+       fixed = F,
+       backtransf = F,
+       contour = c(0.95, 0.99))
+
+title("Contour-Enhanced Funnel Plot")
+
+legend(x = 0.18, y = 0.005,
+       legend = c("p ≥ 0.05", "p < 0.05", "p < 0.01"),
+       fill = c("white" , "#808080", "#E6E6E6"))
+
+```
+
+------------------------------------------------------------------------
+
+#### Applying the Trim and Fill Method
+
+To apply the trim-and-fill method, we will use the `trimfill()` function from the meta package.
+
+To perform the trim and fill method we will use the `trimfill()` function from the `meta` package. Next, we will visualize the results by plotting the adjusted funnel plot.
+
 ```{r Trimm and Fill Method, fig.height=7, fig.width=8, dpi=600}
 tf1<-trimfill(m1)
 
@@ -426,7 +487,19 @@ funnel(tf1,
        fixed = F,
        backtransf = F,
        contour = c(0.95, 0.99))
+
+title("Contour-Enhanced Funnel Plot (Trim and Fill Method)")
+
+legend(x = 0.24, y = 0.005,
+       legend = c("p ≥ 0.05", "p < 0.05", "p < 0.01"),
+       fill = c("white" , "#808080", "#E6E6E6"))
+
+
 ```
+
+------------------------------------------------------------------------
+
+To better visualize the new pooled effect size adjusted for potential publication bias, we can use the `forest()` function with the `trimfill()` object.
 
 ```{r Forest plot after Trim and Fill Method, fig.height=5, fig.width=10, dpi=600}
 
@@ -454,7 +527,16 @@ forest(tf1,
        print.I2.ci = TRUE,
        col.square="darkcyan", col.square.lines="black",
        prediction = TRUE, col.predict = "#CEF2EE",col.predict.lines = "black", ff.predict = 1)
+
 ```
+
+#### How to interpret Fill and Trim Method results?
+
+The trim-and-fill procedure added a total of three studies, imputing effect sizes that indicate a negative intervention effect. The corrected pooled effect size is OR = 0.92 (95% CI: 0.82–1.03), which is not statistically significant. In comparison, the unadjusted analysis, without applying the trim-and-fill method, estimated an OR of 0.88 (95% CI: 0.77–0.99), which was statistically significant.
+
+Overall, the trim-and-fill method suggests that the original pooled effect size of OR = 0.88 may have been overestimated due to small-study effects, potentially leading to a Type I error (false positive). The corrected estimate (OR = 0.92) implies a smaller, non-significant effect, suggesting that the true effect may be weaker or negligible.
+
+While publication bias is a plausible explanation for this overestimation, it is not definitive. Other factors, such as heterogeneity or methodological differences, could also play a role. Consequently, the trim-and-fill estimate should be interpreted with caution, as it may not fully reflect the true effect size.
 
 ------------------------------------------------------------------------
 
@@ -501,3 +583,7 @@ For regression test results, it is usually sufficient to report the value of the
 6.  Pustejovsky JE, Rodgers MA. Testing for funnel plot asymmetry of standardized mean differences. Res Syn Meth. 2019; 10: 57–71.
 
 7.  Deeks JJ, Macaskill P, Irwig L. The performance of tests of publication bias and other sample size effects in systematic reviews of diagnostic test accuracy was assessed. J Clin Epidemiol. 2005 Sep;58(9):882-93.
+
+8.  Duval S & Tweedie R (2000a): A nonparametric "Trim and Fill" method of accounting for publica- tion bias in meta-analysis. Journal of the American Statistical Association, 95, 89–98.
+
+9.  Duval S & Tweedie R (2000b): Trim and Fill: A simple funnel-plot-based method of testing and adjusting for publication bias in meta-analysis. Biometrics, 56, 455–63.
