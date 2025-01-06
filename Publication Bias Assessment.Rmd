@@ -70,7 +70,7 @@ This is precisely why methods for assessing publication bias focus on the issue 
 #### Summary
 
 1.  **Funnel Plot and Contour-Enhanced Funnel Plot** - **QUALITATIVE** way to inspect asymmetry.
-2.  **Regression Tests** - **QUANTITATIVE** way to assess asymmetry.
+2.  **Tests for asymmetry detection** - **QUANTITATIVE** way to assess asymmetry.
 
 ------------------------------------------------------------------------
 
@@ -372,6 +372,38 @@ legend(x = -2.9, y = 1.39, bty = "n", cex = 0.8,
     -   Since the intercept is not significantly different from zero, the funnel plot is likely symmetrical.
 
     -   Symmetry in the funnel plot suggests that small-study effects or publication bias are unlikely to have distorted the results.
+
+------------------------------------------------------------------------
+
+### Duval & Tweedie trim and fill method
+
+```{r}
+
+data(Fleiss1993bin)
+
+m1 <- metabin(d.asp, n.asp, d.plac, n.plac, data = Fleiss1993bin, sm = "OR")
+
+m1
+
+```
+
+```{r}
+tf1<-trimfill(m1)
+
+summary(tf1)
+
+funnel(tf1,
+       studlab = TRUE, 
+       bg = "lightblue", 
+       cex = 2,
+       cex.studlab = 1,
+       random = T,
+       fixed = F,
+       backtransf = F,
+       contour = c(0.95, 0.99))
+
+forest(tf1)
+```
 
 ------------------------------------------------------------------------
 
