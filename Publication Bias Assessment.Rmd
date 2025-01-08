@@ -2,7 +2,9 @@
 title: "Publication Bias Assessment"
 author: "Douglas Mesadri Gewehr, MD - Meta-Analysis Academy"
 date: "2025-01-03"
-output: html_document
+output: 
+  html_document: 
+    toc: true
 ---
 
 <a href="https://gewehrdm.github.io" style="
