@@ -2,7 +2,9 @@
 title: "Binary Outcome Data Meta-Analysis"
 author: "Douglas Mesadri Gewehr, MD - Meta-Analysis Academy"
 date: "2024-12-29"
-output: html_document
+output: 
+  html_document: 
+    toc: true
 ---
 
 <a href="https://gewehrdm.github.io" style="
@@ -23,11 +25,19 @@ output: html_document
     onmousedown="this.style.transform='scale(0.95)';"
     onmouseup="this.style.transform='scale(1.05)';"> ⬅ Back to Menu </a>
 
+------------------------------------------------------------------------
+
 ### Overview
+
+------------------------------------------------------------------------
 
 This tutorial focuses on binary outcome data meta-analysis using the R `meta` package.
 
-#### Load Packages
+------------------------------------------------------------------------
+
+### Load Packages
+
+------------------------------------------------------------------------
 
 ```{r Loading the Packages, message=FALSE, warning=FALSE}
 library(meta)
@@ -36,7 +46,9 @@ library(readxl)
 
 ------------------------------------------------------------------------
 
-#### Importing the Dataset
+### Importing the Dataset
+
+------------------------------------------------------------------------
 
 The entire dataset was converted into a dataframe format for easier handling and compatibility with the R example analysis. The dataframe structure allows seamless data manipulation and analysis using R’s built-in functions and packages.
 
@@ -74,7 +86,9 @@ ma$acm
 
 ------------------------------------------------------------------------
 
-#### Performing the Meta-Analysis
+### Performing the Meta-Analysis
+
+------------------------------------------------------------------------
 
 To perform the meta-analysis of binary outcome data we will use the `metabin()` function from the `meta` package. We need to provide some instructions for the `metabin()` function. These instructions are known as arguments, which can be one, two, three, or more inputs that the function uses to perform its task. The main arguments of the `metabin()` function are:
 
@@ -89,7 +103,9 @@ m.acm <- metabin(event.e, n.e, event.c, n.c,
 
 ------------------------------------------------------------------------
 
-#### Summarizing the Results
+### Summarizing the Results
+
+------------------------------------------------------------------------
 
 To visualize the results of a meta-analysis conducted with the `metabin()` function, we will use the `summary()` function. It will generate a summary of the analysis:
 
@@ -99,7 +115,9 @@ summary(m.acm)
 
 ------------------------------------------------------------------------
 
-#### Creating the Forest Plot
+### Creating the Forest Plot
+
+------------------------------------------------------------------------
 
 To create the forest plot, we will use the `forest()` function. Alongside this function, we will include specific arguments to customize the appearance and content of the forest plot, such as labels, confidence interval formatting, and display options. These arguments ensure the plot is clear, informative, and tailored to the dataset being analyzed.
 
@@ -133,7 +151,9 @@ forest(m.acm,
 
 ------------------------------------------------------------------------
 
-#### References:
+### References
+
+------------------------------------------------------------------------
 
 1.  Core Team (2023). R: A Language and Environment for Statistical Computing. R Foundation for Statistical Computing, Vienna, Austria. <https://www.R-project.org/>
 

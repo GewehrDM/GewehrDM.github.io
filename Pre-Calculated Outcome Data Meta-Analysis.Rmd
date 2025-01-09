@@ -2,10 +2,9 @@
 title: "Pre-Calculated Outcome Data Meta-Analysis"
 author: "Douglas Mesadri Gewehr, MD - Meta-Analysis Academy"
 date: "2024-12-29"
-output: html_document
-editor_options: 
-  markdown: 
-    wrap: 72
+output: 
+  html_document: 
+    toc: true
 ---
 
 <a href="https://gewehrdm.github.io" style="
@@ -26,17 +25,26 @@ editor_options:
     onmousedown="this.style.transform='scale(0.95)';"
     onmouseup="this.style.transform='scale(1.05)';"> ⬅ Back to Menu </a>
 
+------------------------------------------------------------------------
+
 ### Overview
 
-This tutorial focuses on pre-calculated outcome data meta-analysis using
-the R `meta` package.
+------------------------------------------------------------------------
+
+This tutorial focuses on pre-calculated outcome data meta-analysis using the R `meta` package.
+
+------------------------------------------------------------------------
 
 ### Load Packages
+
+------------------------------------------------------------------------
 
 ```{r Loading the Packages, message=FALSE, warning=FALSE}
 library(meta)
 library(readxl)
 ```
+
+------------------------------------------------------------------------
 
 ### Ratio Measures Meta-Analysis
 
@@ -72,10 +80,9 @@ library(readxl)
 
 #### Importing the Dataset
 
-The entire dataset was converted into a dataframe format for easier
-handling and compatibility with the R example analysis. The dataframe
-structure allows seamless data manipulation and analysis using R’s
-built-in functions and packages.
+------------------------------------------------------------------------
+
+The entire dataset was converted into a dataframe format for easier handling and compatibility with the R example analysis. The dataframe structure allows seamless data manipulation and analysis using R’s built-in functions and packages.
 
 ```{r Dataset - Ratios, include=FALSE}
 ma<-list(rr=structure(list(Author = c("Study 1", "Study 2", "Study 3", "Study 4"
@@ -95,12 +102,9 @@ ma$rr
 
 #### Performing the Meta-Analysis
 
-To perform the meta-analysis of ratio measures we will use the
-`metagen()` function from the `meta` package. We need to provide some
-instructions for the `metagen()` function. These instructions are known
-as arguments, which can be one, two, three, or more inputs that the
-function uses to perform its task. The main arguments of the `metagen()`
-function are:
+------------------------------------------------------------------------
+
+To perform the meta-analysis of ratio measures we will use the `metagen()` function from the `meta` package. We need to provide some instructions for the `metagen()` function. These instructions are known as arguments, which can be one, two, three, or more inputs that the function uses to perform its task. The main arguments of the `metagen()` function are:
 
 ```{r Performing the Meta-Analysis - Ratios, echo=TRUE}
 m.rr<-metagen(TE=log(TE), seTE=seTE, lower=log(lower), upper=log(upper),
@@ -115,9 +119,9 @@ m.rr<-metagen(TE=log(TE), seTE=seTE, lower=log(lower), upper=log(upper),
 
 #### Summarizing the Results
 
-To visualize the results of a meta-analysis conducted with the
-`metagen()` function, we will use the `summary()` function. It will
-generate a summary of the analysis:
+------------------------------------------------------------------------
+
+To visualize the results of a meta-analysis conducted with the `metagen()` function, we will use the `summary()` function. It will generate a summary of the analysis:
 
 ```{r Summarize the results - Ratios}
 summary(m.rr)
@@ -127,12 +131,9 @@ summary(m.rr)
 
 #### Creating the Forest Plot
 
-To create the forest plot, we will use the `forest()` function.
-Alongside this function, we will include specific arguments to customize
-the appearance and content of the forest plot, such as labels,
-confidence interval formatting, and display options. These arguments
-ensure the plot is clear, informative, and tailored to the dataset being
-analyzed.
+------------------------------------------------------------------------
+
+To create the forest plot, we will use the `forest()` function. Alongside this function, we will include specific arguments to customize the appearance and content of the forest plot, such as labels, confidence interval formatting, and display options. These arguments ensure the plot is clear, informative, and tailored to the dataset being analyzed.
 
 ```{r Creating the Forest Plot - Ratios, echo=TRUE, fig.height=4, fig.width=10, dpi=600}
 forest(m.rr,
@@ -185,10 +186,9 @@ forest(m.rr,
 
 #### Importing the Dataset
 
-The entire dataset was converted into a dataframe format for easier
-handling and compatibility with the R example analysis. The dataframe
-structure allows seamless data manipulation and analysis using R’s
-built-in functions and packages.
+------------------------------------------------------------------------
+
+The entire dataset was converted into a dataframe format for easier handling and compatibility with the R example analysis. The dataframe structure allows seamless data manipulation and analysis using R’s built-in functions and packages.
 
 ```{r Dataset - Differences, include=FALSE}
 ma<-list(los=structure(list(Author = c("Study 1", "Study 2", "Study 3", "Study 4"
@@ -210,12 +210,7 @@ ma$los
 
 ------------------------------------------------------------------------
 
-To perform the meta-analysis of difference measures we will use the
-`metagen()` function from the `meta` package. We need to provide some
-instructions for the `metagen()` function. These instructions are known
-as arguments, which can be one, two, three, or more inputs that the
-function uses to perform its task. The main arguments of the `metagen()`
-function are:
+To perform the meta-analysis of difference measures we will use the `metagen()` function from the `meta` package. We need to provide some instructions for the `metagen()` function. These instructions are known as arguments, which can be one, two, three, or more inputs that the function uses to perform its task. The main arguments of the `metagen()` function are:
 
 ```{r Performing the Meta-Analysis - Differences, echo=TRUE}
 m.los<-metagen(TE=TE, seTE=seTE, lower=lower, upper=upper,
@@ -230,9 +225,9 @@ m.los<-metagen(TE=TE, seTE=seTE, lower=lower, upper=upper,
 
 #### Summarizing the Results
 
-To visualize the results of a meta-analysis conducted with the
-`metagen()` function, we will use the `summary()` function. It will
-generate a summary of the analysis:
+------------------------------------------------------------------------
+
+To visualize the results of a meta-analysis conducted with the `metagen()` function, we will use the `summary()` function. It will generate a summary of the analysis:
 
 ```{r Summarize the results - Differences}
 summary(m.los)
@@ -242,12 +237,9 @@ summary(m.los)
 
 #### Creating the Forest Plot
 
-To create the forest plot, we will use the `forest()` function.
-Alongside this function, we will include specific arguments to customize
-the appearance and content of the forest plot, such as labels,
-confidence interval formatting, and display options. These arguments
-ensure the plot is clear, informative, and tailored to the dataset being
-analyzed.
+------------------------------------------------------------------------
+
+To create the forest plot, we will use the `forest()` function. Alongside this function, we will include specific arguments to customize the appearance and content of the forest plot, such as labels, confidence interval formatting, and display options. These arguments ensure the plot is clear, informative, and tailored to the dataset being analyzed.
 
 ```{r Creating the Forest Plot - Differences, echo=TRUE, fig.height=4, fig.width=10, dpi=600}
 forest(m.los,
@@ -280,22 +272,27 @@ forest(m.los,
 
 ### Working with different confidence intervals
 
-In meta-analyses, studies may report confidence intervals (CIs) with
-different levels of confidence (e.g., 90%, 95%, or 99%). To standardize
-the data for analysis, you must first calculate the Standard Error for
-all studies using their reported CIs, regardless of the confidence
-level. Once the SE is calculated, the treatment effect and its SE can be
-used uniformly in the metagen() function.
+------------------------------------------------------------------------
+
+In meta-analyses, studies may report confidence intervals (CIs) with different levels of confidence (e.g., 90%, 95%, or 99%). To standardize the data for analysis, you must first calculate the Standard Error for all studies using their reported CIs, regardless of the confidence level. Once the SE is calculated, the treatment effect and its SE can be used uniformly in the metagen() function.
 
 ------------------------------------------------------------------------
 
 #### Excel Formula for Calculating the SE from 90% Confidence Interval - Studies with \> 60 patients in each group
 
+------------------------------------------------------------------------
+
 ##### Ratio Measures
+
+------------------------------------------------------------------------
 
 `=(log(Upper_CI) - log(Lower_CI))/3.29`
 
+------------------------------------------------------------------------
+
 ##### Difference Measures
+
+------------------------------------------------------------------------
 
 `=(Upper_CI - Lower_CI)/3.29`
 
@@ -303,11 +300,19 @@ used uniformly in the metagen() function.
 
 #### Excel Formula for Calculating the SE from 95% Confidence Interval - Studies with \> 60 patients in each group
 
+------------------------------------------------------------------------
+
 ##### Ratio Measures
+
+------------------------------------------------------------------------
 
 `=(log(Upper_CI) - log(Lower_CI))/3.92`
 
+------------------------------------------------------------------------
+
 ##### Difference Measures
+
+------------------------------------------------------------------------
 
 `=(Upper_CI - Lower_CI)/3.92`
 
@@ -315,11 +320,19 @@ used uniformly in the metagen() function.
 
 #### Excel Formula for Calculating the SE from 99% Confidence Interval - Studies with \> 60 patients in each group
 
+------------------------------------------------------------------------
+
 ##### Ratio Measures
+
+------------------------------------------------------------------------
 
 `=(log(Upper_CI) - log(Lower_CI))/5.15`
 
+------------------------------------------------------------------------
+
 ##### Difference Measures
+
+------------------------------------------------------------------------
 
 `=(Upper_CI - Lower_CI)/5.15`
 
@@ -327,30 +340,33 @@ used uniformly in the metagen() function.
 
 #### Calculating the SE - Studies with \< 60 patients in each group
 
-When the sample size in each group is small (e.g., fewer than 60
-participants per group), confidence intervals should be calculated using
-the t-distribution instead of the normal distribution. The constants
-3.92 , 3.29 , and 5.15 (derived from the normal distribution) must be
-replaced with larger values specific to the t distribution, accounting
-for the sample size and degrees of freedom (df).
+------------------------------------------------------------------------
 
-1.  Before calculating the t statistic and subsequent SE for confidence
-    intervals, it is essential to clearly define:
+When the sample size in each group is small (e.g., fewer than 60 participants per group), confidence intervals should be calculated using the t-distribution instead of the normal distribution. The constants 3.92 , 3.29 , and 5.15 (derived from the normal distribution) must be replaced with larger values specific to the t distribution, accounting for the sample size and degrees of freedom (df).
+
+1.  Before calculating the t statistic and subsequent SE for confidence intervals, it is essential to clearly define:
 
     (a) Confidence level;
 
     (b) Sample size in control (n.c) and experimental (n.e) group
 
-2.  In an Excel cell, type the following formula using the variables:
-    `=tinv(1-CI, n.e+n.c-2)`
+2.  In an Excel cell, type the following formula using the variables: `=tinv(1-CI, n.e+n.c-2)`
 
 3.  Calculate the SE Using the t-Statistic:
 
+------------------------------------------------------------------------
+
 ##### Ratio Measures
+
+------------------------------------------------------------------------
 
 `=(log(Upper_CI) - log(Lower_CI))/2*t`
 
+------------------------------------------------------------------------
+
 ##### Difference Measures
+
+------------------------------------------------------------------------
 
 `=(Upper_CI - Lower_CI)/2*t`
 
@@ -358,17 +374,12 @@ for the sample size and degrees of freedom (df).
 
 ### References:
 
-1.  Core Team (2023). R: A Language and Environment for Statistical
-    Computing. R Foundation for Statistical Computing, Vienna, Austria.
-    <https://www.R-project.org/>
-2.  RStudio Team (2020). RStudio: Integrated Development for R. RStudio,
-    PBC, Boston, MA URL <http://www.rstudio.com/>
-3.  meta package: Balduzzi S, Rücker G, Schwarzer G. How to perform a
-    meta-analysis with R: a practical tutorial. In: Evidence-Based
-    Mental Health. 22nd ed.; 2019:153-160.
-4.  readxl package: Wickham H, Bryan J (2023). readxl: Read Excel Files.
-    <https://readxl.tidyverse.org>,
-    <https://github.com/tidyverse/readxl>.
+------------------------------------------------------------------------
+
+1.  Core Team (2023). R: A Language and Environment for Statistical Computing. R Foundation for Statistical Computing, Vienna, Austria. <https://www.R-project.org/>
+2.  RStudio Team (2020). RStudio: Integrated Development for R. RStudio, PBC, Boston, MA URL <http://www.rstudio.com/>
+3.  meta package: Balduzzi S, Rücker G, Schwarzer G. How to perform a meta-analysis with R: a practical tutorial. In: Evidence-Based Mental Health. 22nd ed.; 2019:153-160.
+4.  readxl package: Wickham H, Bryan J (2023). readxl: Read Excel Files. <https://readxl.tidyverse.org>, <https://github.com/tidyverse/readxl>.
 
 <a href="https://gewehrdm.github.io" style="
     display: inline-block;
