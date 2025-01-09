@@ -4,6 +4,7 @@ author: "Douglas Mesadri Gewehr, MD - Meta-Analysis Academy"
 output: 
   html_document: 
     toc: true
+    toc_depth: 6
 ---
 
 <a href="https://gewehrdm.github.io" style="

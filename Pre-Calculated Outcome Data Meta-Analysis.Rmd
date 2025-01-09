@@ -5,6 +5,7 @@ date: "2024-12-29"
 output: 
   html_document: 
     toc: true
+    toc_depth: 6
 ---
 
 <a href="https://gewehrdm.github.io" style="
