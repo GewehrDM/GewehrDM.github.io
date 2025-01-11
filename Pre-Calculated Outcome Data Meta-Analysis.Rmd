@@ -57,7 +57,7 @@ library(readxl)
 
 ##### Excel Formula for Calculating the Odds Ratio (OR)
 
-##### `=(event.e / (n.e - event.e)) / (event.c / (n.c - event.c))`
+`=(event.e / (n.e - event.e)) / (event.c / (n.c - event.c))`
 
 ------------------------------------------------------------------------
 
