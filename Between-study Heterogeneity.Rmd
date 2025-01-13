@@ -127,9 +127,11 @@ These three measures are related to heterogeneity in meta-analysis, but they ser
 
     -   **Practical use:** Quantifies how much the effect sizes differ between studies.
 
-        -   [Tau:]{.underline} represents in log-scale the standard deviation of the true effect sizes among studies.
+        -   [Tau:]{.underline} represents the standard deviation of the true effect sizes among studies.
 
         -   [Tau-squared:]{.underline} represents the variance of the true effect sizes among studies.
+
+        -   Tau is in log scale when dealing with ratio measures (e.g., OR, RR, HR) because these analyses use the logarithmic transformation to normalize ratios and simplify calculations. For difference measures (e.g., MD, SMD), remains in the original scale of the effect.
 
     -   **How to interpret:**
 
