@@ -121,17 +121,21 @@ These three measures are related to heterogeneity in meta-analysis, but they ser
 
         -   [High Q (Chi^2^) and significant (p ≤ 0.10):]{.underline} suggests that the variability is likely due to chance.
 
-2.  [**Tau^2^** – “How Much Heterogeneity?”]{.underline}
+2.  [**Tau and Tau^2^** – “How Much Heterogeneity?”]{.underline}
 
     -   **What it does:** Measures the absolute amount of variance in the true effect sizes across studies.
 
     -   **Practical use:** Quantifies how much the effect sizes differ between studies.
 
+        -   [Tau:]{.underline} represents in log-scale the standard deviation of the true effect sizes among studies.
+
+        -   [Tau-squared:]{.underline} represents the variance of the true effect sizes among studies.
+
     -   **How to interpret:**
 
-        -   **Tau^2^ = 0:** No variability between studies (all studies estimate the same effect size).Greater variability in the true effects.
+        -   **Tau and Tau^2^ = 0:** No variability between studies (all studies estimate the same effect size)
 
-        -   **Larger Tau^2^:** Greater variability in the true effects.
+        -   **Larger Tau/Tau^2^:** Greater variability in the true effects.
 
 3.  [***I^2^*** - “What Percentage of the Variability is Due to Heterogeneity?”]{.underline}
 
